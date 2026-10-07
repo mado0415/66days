@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>66 DAYS — Snow Manを生活の中に</title>
+<style>
+:root{
+  --bg:#f7fbfd;
+  --card:#ffffff;
+  --ink:#15323f;
+  --sub:#6d8792;
+  --line:#d9e8ee;
+  --accent:#8fd8f2;
+  --accent2:#dff5fd;
+  --good:#e5f7ea;
+  --good-ink:#2c6d43;
+  --soft:#f1f6f8;
+  --miss:#f3f3f3;
+  --miss-ink:#7a7a7a;
+  --shadow:0 10px 28px rgba(40,96,120,.10);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%, #e7f8ff 0, transparent 28%),
+    radial-gradient(circle at 95% 12%, #f4fbff 0, transparent 26%),
+    var(--bg);
+  color:var(--ink);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 80px}
+.hero{
+  padding:24px 20px 18px;
+  background:linear-gradient(145deg,#fff,#effaff);
+  border:1px solid #dcecf2;
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  margin-top:10px;
+}
+.kicker{font-size:12px;letter-spacing:.16em;font-weight:800;color:#5b95ab}
+h1{font-size:30px;line-height:1.2;margin:8px 0 10px}
+.hero p{margin:0;color:var(--sub);line-height:1.75;font-size:14px}
+.card{
+  background:var(--card);
+  border:1px solid #e3eef2;
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:0 5px 20px rgba(46,84,100,.06);
+  margin-top:14px;
+}
+.hidden{display:none!important}
+.titleRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.titleRow h2,.card h2{font-size:18px;margin:0}
+.small{font-size:12px;color:var(--sub)}
+.note{
+  border-left:4px solid var(--accent);
+  background:#f4fbfe;
+  padding:12px 14px;
+  border-radius:12px;
+  color:#466775;
+  font-size:13px;
+  line-height:1.65;
+}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 7px}
+select,input[type="date"],input[type="text"]{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:14px;
+  padding:13px 14px;
+  color:var(--ink);
+}
+.cueGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.cueBtn{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:14px;
+  padding:12px 10px;
+  text-align:left;
+  color:var(--ink);
+}
+.cueBtn.active{
+  border-color:#6fc5e4;
+  background:var(--accent2);
+  box-shadow:inset 0 0 0 1px #6fc5e4;
+}
+.primary{
+  width:100%;
+  border:0;
+  background:var(--ink);
+  color:#fff;
+  border-radius:15px;
+  padding:14px 16px;
+  font-weight:800;
+  margin-top:16px;
+}
+.secondary{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  border-radius:14px;
+  padding:11px 14px;
+  font-weight:700;
+}
+.progressWrap{margin-top:14px}
+.progressBar{height:10px;background:#eaf1f4;border-radius:999px;overflow:hidden}
+.progressFill{height:100%;width:0;background:linear-gradient(90deg,#98def6,#5dbce0);border-radius:999px;transition:.25s}
+.statusTop{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+}
+.dayNum{font-size:38px;font-weight:900;letter-spacing:-.04em}
+.phase{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 10px;
+  background:var(--accent2);
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  color:#3f829d;
+}
+.cueStatement{
+  margin:15px 0 0;
+  padding:14px;
+  border-radius:15px;
+  background:#f4fafc;
+  font-size:15px;
+  line-height:1.55;
+  font-weight:800;
+}
+.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+.actionBtn{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px 14px;
+  background:#fff;
+  text-align:left;
+}
+.actionBtn strong{display:block;font-size:15px}
+.actionBtn span{display:block;margin-top:4px;font-size:12px;color:var(--sub);font-weight:500}
+.actionBtn.auto{background:#ecfbf1;border-color:#caefd5}
+.actionBtn.remember{background:#eef9fd;border-color:#d3edf8}
+.actionBtn.miss{background:#f7f7f7;border-color:#e7e7e7}
+.todayDone{
+  margin-top:14px;
+  padding:13px 14px;
+  border-radius:14px;
+  background:#f4fbfe;
+  font-size:13px;
+  color:#496d7b;
+  line-height:1.6;
+}
+.grid66{
+  display:grid;
+  grid-template-columns:repeat(11,1fr);
+  gap:5px;
+  margin-top:14px;
+}
+.cell{
+  aspect-ratio:1/1;
+  border-radius:8px;
+  background:#edf2f4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  color:#90a2aa;
+  position:relative;
+}
+.cell.future{opacity:.55}
+.cell.today{outline:2px solid #5bbfe4;outline-offset:1px}
+.cell.auto{background:#dff5e6;color:#2f6a46}
+.cell.remember{background:#dff2fa;color:#34718a}
+.cell.miss{background:#eeeeee;color:#888}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px;font-size:11px;color:var(--sub)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.weekCard{
+  padding:13px 14px;
+  background:#f7fbfd;
+  border:1px solid #e0edf2;
+  border-radius:14px;
+  margin-top:10px;
+}
+.weekCard strong{font-size:13px}
+.weekCard p{font-size:12px;color:var(--sub);margin:5px 0 0;line-height:1.55}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+.stat{
+  padding:12px 8px;
+  background:#f7fbfc;
+  border-radius:14px;
+  text-align:center;
+}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:11px;color:var(--sub)}
+.footerTools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.danger{color:#8a4d4d;border-color:#ecdada}
+hr{border:0;border-top:1px solid #edf2f4;margin:16px 0}
+details{margin-top:12px}
+summary{cursor:pointer;font-size:13px;font-weight:800;color:#53727f}
+.detailsBody{font-size:12px;line-height:1.7;color:var(--sub);padding-top:8px}
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(15px);
+  background:#173440;color:#fff;padding:11px 14px;border-radius:999px;
+  font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:20;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:520px){
+  h1{font-size:27px}
+  .grid66{grid-template-columns:repeat(6,1fr);gap:6px}
+  .cell{font-size:10px;border-radius:8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="kicker">66 DAYS</div>
+    <h1>Snow Manを<br>生活の中に置いてみる</h1>
+    <p>66日間、毎日完璧に続けるチャレンジではありません。<br>いつもの生活のどこかに「Snow Manを再生する場所」をひとつ作ってみるための記録です。</p>
+  </section>
+
+  <section id="setupCard" class="card">
+    <h2>まず「いつ聴くか」を決める</h2>
+    <p class="small">最初の1週間は変えてもOK。自分に合うタイミングを探してみてください。</p>
+
+    <label>Snow Manを再生するタイミング</label>
+    <div class="cueGrid" id="cueGrid">
+      <button class="cueBtn" data-cue="通勤・通学を始めたら">🚃 通勤・通学</button>
+      <button class="cueBtn" data-cue="朝の支度を始めたら">☀️ 朝の支度</button>
+      <button class="cueBtn" data-cue="メイクを始めたら">🪞 メイク</button>
+      <button class="cueBtn" data-cue="夕飯を作り始めたら">🍳 夕飯づくり</button>
+      <button class="cueBtn" data-cue="お風呂に入ったら">🛁 お風呂</button>
+      <button class="cueBtn" data-cue="スキンケアを始めたら">🫧 スキンケア</button>
+      <button class="cueBtn" data-cue="車に乗ったら">🚗 車に乗る</button>
+      <button class="cueBtn" data-cue="家事を始めたら">🧺 家事</button>
+    </div>
+
+    <label for="customCue">自分で決める</label>
+    <input id="customCue" type="text" placeholder="例：帰宅してバッグを置いたら">
+
+    <label for="startDate">スタート日</label>
+    <input id="startDate" type="date">
+
+    <div class="note" style="margin-top:14px">
+      今日の最低ラインは<strong>「1曲再生したらOK」</strong>。途中で聴けない日があっても、最初からやり直しにはなりません。
+    </div>
+    <button id="startBtn" class="primary">66 DAYSをはじめる</button>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <section class="card">
+      <div class="statusTop">
+        <div>
+          <div class="small">TODAY</div>
+          <div class="dayNum"><span id="dayNow">1</span><span style="font-size:16px;font-weight:800"> / 66</span></div>
+        </div>
+        <div id="phaseBadge" class="phase">🌱 見つける</div>
+      </div>
+      <div class="progressWrap">
+        <div class="progressBar"><div id="progressFill" class="progressFill"></div></div>
+      </div>
+      <div id="cueStatement" class="cueStatement"></div>
+      <div id="phaseMessage" class="small" style="margin-top:9px;line-height:1.65"></div>
+    </section>
+
+    <section class="card">
+      <div class="titleRow">
+        <h2>今日どうだった？</h2>
+        <span class="small">1タップで記録</span>
+      </div>
+      <div class="actions">
+        <button class="actionBtn auto" data-state="auto">
+          <strong>🌿 気づいたら再生してた</strong>
+          <span>「聴こう」と考える前に、いつもの流れで再生していた</span>
+        </button>
+        <button class="actionBtn remember" data-state="remember">
+          <strong>💭 思い出して再生した</strong>
+          <span>自分で思い出して再生できた。これも十分。</span>
+        </button>
+        <button class="actionBtn miss" data-state="miss">
+          <strong>☁️ 今日は聴かなかった</strong>
+          <span>記録だけして次の日へ。連続記録はありません。</span>
+        </button>
+      </div>
+      <div id="todayDone" class="todayDone hidden"></div>
+    </section>
+
+    <section class="card">
+      <div class="titleRow">
+        <h2>66日の記録</h2>
+        <span class="small">空白があってもOK</span>
+      </div>
+      <div id="grid66" class="grid66"></div>
+      <div class="legend">
+        <span><i class="dot" style="background:#dff5e6"></i>気づいたら再生</span>
+        <span><i class="dot" style="background:#dff2fa"></i>思い出して再生</span>
+        <span><i class="dot" style="background:#eee"></i>聴かなかった</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="statAuto">0</b><span>自然に再生</span></div>
+        <div class="stat"><b id="statRemember">0</b><span>思い出して再生</span></div>
+        <div class="stat"><b id="statMiss">0</b><span>お休み</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>今の変化</h2>
+      <div id="reflection" class="weekCard"></div>
+      <details>
+        <summary>この記録で大事にしていること</summary>
+        <div class="detailsBody">
+          「毎日欠かさず聴くこと」より、日常の同じ場面と再生を結びつけることを大切にしています。
+          1日抜けても失敗ではありません。66日後に、企画を思い出さなくても自然に再生する場面が増えていたら成功です。
+        </div>
+      </details>
+      <div class="footerTools">
+        <button id="editCueBtn" class="secondary">タイミングを変える</button>
+        <button id="copySummaryBtn" class="secondary">今の記録をコピー</button>
+        <button id="resetBtn" class="secondary danger">記録をリセット</button>
+      </div>
+    </section>
+  </section>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='snow66days_v1';
+const setupCard=document.getElementById('setupCard');
+const dashboard=document.getElementById('dashboard');
+const cueBtns=[...document.querySelectorAll('.cueBtn')];
+const customCue=document.getElementById('customCue');
+const startDate=document.getElementById('startDate');
+const startBtn=document.getElementById('startBtn');
+const dayNow=document.getElementById('dayNow');
+const phaseBadge=document.getElementById('phaseBadge');
+const progressFill=document.getElementById('progressFill');
+const cueStatement=document.getElementById('cueStatement');
+const phaseMessage=document.getElementById('phaseMessage');
+const actionBtns=[...document.querySelectorAll('.actionBtn')];
+const todayDone=document.getElementById('todayDone');
+const grid66=document.getElementById('grid66');
+const statAuto=document.getElementById('statAuto');
+const statRemember=document.getElementById('statRemember');
+const statMiss=document.getElementById('statMiss');
+const reflection=document.getElementById('reflection');
+const editCueBtn=document.getElementById('editCueBtn');
+const copySummaryBtn=document.getElementById('copySummaryBtn');
+const resetBtn=document.getElementById('resetBtn');
+const toast=document.getElementById('toast');
+
+let selectedCue='';
+let data=null;
+
+function todayISO(){
+  const d=new Date();
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+startDate.value=todayISO();
+
+function localMidnight(iso){
+  const [y,m,d]=iso.split('-').map(Number);
+  return new Date(y,m-1,d);
+}
+function diffDays(a,b){
+  const ms=localMidnight(a)-localMidnight(b);
+  return Math.floor(ms/86400000);
+}
+function getCurrentDay(){
+  if(!data) return 1;
+  return Math.max(1,Math.min(66,diffDays(todayISO(),data.startDate)+1));
+}
+function getRawCurrentDay(){
+  if(!data) return 1;
+  return diffDays(todayISO(),data.startDate)+1;
+}
+function phaseFor(day){
+  if(day<=7) return {
+    badge:'🌱 見つける',
+    text:'まずは、自分の生活のどこなら無理なく再生できるかを探す期間です。合わなければタイミングを変えてOK。'
+  };
+  if(day<=21) return {
+    badge:'🔗 結びつける',
+    text:'決めたタイミングと「再生」を少しずつ結びつける期間。同じ流れを繰り返せれば十分です。'
+  };
+  if(day<=45) return {
+    badge:'🌿 なじませる',
+    text:'「頑張って聴く」より「いつもの流れで再生する」へ。自然に再生できた日は、その変化を記録してみてください。'
+  };
+  return {
+    badge:'✨ 生活になる',
+    text:'企画を意識しなくてもSnow Manが流れる場面が増えたかを確かめる期間です。完璧さより、自然さを見ます。'
+  };
+}
+function stateLabel(s){
+  return s==='auto'?'気づいたら再生してた':s==='remember'?'思い出して再生した':'今日は聴かなかった';
+}
+function showToast(msg){
+  toast.textContent=msg;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),1600);
+}
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(data));
+}
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(raw) data=JSON.parse(raw);
+  }catch(e){}
+}
+function setCue(cue){
+  selectedCue=cue;
+  cueBtns.forEach(b=>b.classList.toggle('active',b.dataset.cue===cue));
+  if(cue && !cueBtns.some(b=>b.dataset.cue===cue)) customCue.value=cue;
+}
+cueBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    customCue.value='';
+    setCue(btn.dataset.cue);
+  });
+});
+customCue.addEventListener('input',()=>{
+  if(customCue.value.trim()){
+    selectedCue=customCue.value.trim();
+    cueBtns.forEach(b=>b.classList.remove('active'));
+  }
+});
+
+startBtn.addEventListener('click',()=>{
+  const cue=(customCue.value.trim()||selectedCue).trim();
+  if(!cue){ showToast('再生するタイミングを選んでください'); return; }
+  data={
+    cue,
+    startDate:startDate.value||todayISO(),
+    logs:{}
+  };
+  save();
+  render();
+});
+
+function render(){
+  if(!data){
+    setupCard.classList.remove('hidden');
+    dashboard.classList.add('hidden');
+    return;
+  }
+  setupCard.classList.add('hidden');
+  dashboard.classList.remove('hidden');
+
+  const rawDay=getRawCurrentDay();
+  const day=getCurrentDay();
+  dayNow.textContent=day;
+  const ph=phaseFor(day);
+  phaseBadge.textContent=ph.badge;
+  phaseMessage.textContent=ph.text;
+  cueStatement.textContent=`「${data.cue}」 → Snow Manを1曲再生`;
+  progressFill.style.width=`${Math.max(0,Math.min(100,(day/66)*100))}%`;
+
+  const todayKey=String(day);
+  const todayState=data.logs?.[todayKey];
+  if(rawDay<1){
+    todayDone.classList.remove('hidden');
+    todayDone.textContent=`スタートは ${data.startDate} です。開始日になったらここから記録できます。`;
+    actionBtns.forEach(b=>b.disabled=true);
+  }else if(rawDay>66){
+    todayDone.classList.remove('hidden');
+    todayDone.textContent='66日間、おつかれさまでした。記録はそのまま残っています。';
+    actionBtns.forEach(b=>b.disabled=true);
+  }else{
+    actionBtns.forEach(b=>b.disabled=false);
+    if(todayState){
+      todayDone.classList.remove('hidden');
+      todayDone.textContent=`今日は「${stateLabel(todayState)}」で記録済みです。別のボタンを押すと上書きできます。`;
+    }else{
+      todayDone.classList.add('hidden');
+    }
+  }
+
+  renderGrid(day,rawDay);
+  renderStats();
+  renderReflection(day);
+}
+
+function renderGrid(day,rawDay){
+  grid66.innerHTML='';
+  for(let i=1;i<=66;i++){
+    const c=document.createElement('div');
+    c.className='cell';
+    c.textContent=i;
+    const s=data.logs?.[String(i)];
+    if(s) c.classList.add(s);
+    if(i===day && rawDay>=1 && rawDay<=66) c.classList.add('today');
+    if(i>rawDay) c.classList.add('future');
+    grid66.appendChild(c);
+  }
+}
+
+function renderStats(){
+  const vals=Object.values(data.logs||{});
+  statAuto.textContent=vals.filter(v=>v==='auto').length;
+  statRemember.textContent=vals.filter(v=>v==='remember').length;
+  statMiss.textContent=vals.filter(v=>v==='miss').length;
+}
+
+function renderReflection(day){
+  const vals=Object.values(data.logs||{});
+  const auto=vals.filter(v=>v==='auto').length;
+  const remember=vals.filter(v=>v==='remember').length;
+  const total=auto+remember;
+  let title='まだ始まったばかり';
+  let body='まずは「ここなら聴けそう」という生活の場所を見つけられれば十分です。';
+  if(day>=8 && total>0){
+    title='再生する場所が少しずつできています';
+    body=`これまでに${total}日、Snow Manを生活の中で再生できています。連続しているかより、同じ場面で繰り返せているかを見てみてください。`;
+  }
+  if(day>=22 && auto>0){
+    title='「思い出す」より先に動けた日があります';
+    body=`「気づいたら再生してた」が${auto}日あります。ここが、この66日でいちばん見たい変化です。`;
+  }
+  if(day>=46){
+    title='企画がなくても続きそう？';
+    body=auto>remember
+      ? '自然に再生できた日の方が多くなっています。66日後も、この生活の場面はそのまま残ります。'
+      : 'まだ「思い出して再生」が多くても大丈夫。自分に合うタイミングに調整しながら続けてみてください。';
+  }
+  reflection.innerHTML=`<strong>${title}</strong><p>${body}</p>`;
+}
+
+actionBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(!data) return;
+    const rawDay=getRawCurrentDay();
+    if(rawDay<1 || rawDay>66) return;
+    const day=getCurrentDay();
+    data.logs[String(day)]=btn.dataset.state;
+    save();
+    render();
+    showToast('今日の記録を保存しました');
+  });
+});
+
+editCueBtn.addEventListener('click',()=>{
+  setupCard.classList.remove('hidden');
+  dashboard.classList.add('hidden');
+  startDate.value=data.startDate;
+  setCue(data.cue);
+  startBtn.textContent='この内容で続ける';
+  startBtn.onclick=null;
+  startBtn.addEventListener('click',editAndContinue,{once:true});
+});
+function editAndContinue(e){
+  e.preventDefault();
+  const cue=(customCue.value.trim()||selectedCue).trim();
+  if(!cue){ showToast('再生するタイミングを選んでください'); return; }
+  data.cue=cue;
+  data.startDate=startDate.value||data.startDate;
+  save();
+  startBtn.textContent='66 DAYSをはじめる';
+  render();
+}
+
+copySummaryBtn.addEventListener('click',async()=>{
+  const vals=Object.values(data.logs||{});
+  const auto=vals.filter(v=>v==='auto').length;
+  const remember=vals.filter(v=>v==='remember').length;
+  const miss=vals.filter(v=>v==='miss').length;
+  const day=getCurrentDay();
+  const txt=`66 DAYS｜DAY ${day}/66\n「${data.cue}」→ Snow Manを再生\n🌿 気づいたら再生：${auto}日\n💭 思い出して再生：${remember}日\n☁️ お休み：${miss}日\n\n毎日完璧に続けるのではなく、生活の中に自然な再生の場所をつくる66日。`;
+  try{
+    await navigator.clipboard.writeText(txt);
+    showToast('記録をコピーしました');
+  }catch(e){
+    showToast('コピーできませんでした');
+  }
+});
+
+resetBtn.addEventListener('click',()=>{
+  if(confirm('66 DAYSの記録をすべて消しますか？')){
+    localStorage.removeItem(KEY);
+    data=null;
+    selectedCue='';
+    customCue.value='';
+    cueBtns.forEach(b=>b.classList.remove('active'));
+    startBtn.textContent='66 DAYSをはじめる';
+    startDate.value=todayISO();
+    render();
+  }
+});
+
+load();
+render();
+</script>
+</body>
+</html>
