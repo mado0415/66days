@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5fbfd">
-<title>66 DAYS — Snow Manを生活の中に</title>
+<title>66 DAYS｜毎日ストリーミングを習慣にする</title>
 <style>
 :root{
   --bg:#f5fafc;--card:#fff;--ink:#18323e;--sub:#6d8590;
@@ -135,38 +135,38 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 <div class="wrap">
   <section class="hero">
     <div class="kicker">66 DAYS</div>
-    <h1>Snow Manを<br>生活の中に置いてみる</h1>
-    <p>毎日このページへ来る企画ではありません。最初に一度だけ、生活の中へ「聴くきっかけ」を仕込みます。</p>
-    <div class="rule">最初は合図に助けてもらう。少しずつ減らす。最後は、合図なしで聴けるか試してみる。</div>
+    <h1>毎日ストリーミングを<br>習慣にする</h1>
+    <p>毎日ストリーミングしたいけど、なかなか続かない人向けの66日間です。最初に一度だけ、普段の生活の中でSnow Manを聴くタイミングを決めます。</p>
+    <div class="rule">最初は毎日通知。慣れてきたら少しずつ減らして、最後の6日間は通知なしで試します。</div>
   </section>
 
   <section id="day7Card" class="card hidden">
-    <h2>DAY 7｜このタイミング、合ってる？</h2>
-    <p class="desc">1週間やってみた今の感覚を選んでください。合わなければ、ここで置き場所を変えて大丈夫です。</p>
+    <h2>DAY 7｜このタイミング、続けやすい？</h2>
+    <p class="desc">1週間試してみて、今の生活に合っているか確認してみましょう。合わなければ、ここで変えて大丈夫です。</p>
     <div class="optionList" id="day7Options">
-      <button class="option" data-d7="good"><strong>このタイミングなら続けられそう</strong><span>今のまま続けます。</span></button>
-      <button class="option" data-d7="forget"><strong>忘れることが多かった</strong><span>通知の時刻を少し変える、またはもっと目につく生活場面に変えるのがおすすめ。</span></button>
-      <button class="option" data-d7="mismatch"><strong>そもそもこの時間に聴けなかった</strong><span>「続けられない」のではなく、置く場所が合っていない可能性があります。</span></button>
+      <button class="option" data-d7="good"><strong>このまま続けられそう</strong><span>今のタイミングで続けます。</span></button>
+      <button class="option" data-d7="forget"><strong>通知が来ても忘れることが多かった</strong><span>通知の時刻を変えるか、もっと毎日決まってすることに合わせると続けやすいかもしれません。</span></button>
+      <button class="option" data-d7="mismatch"><strong>この時間は聴きにくかった</strong><span>無理に続けず、別の時間や行動に変えてみましょう。</span></button>
     </div>
     <div id="day7Result" class="resultBox hidden"></div>
-    <button id="day7EditBtn" class="secondary hidden">タイミングを設定し直す</button>
+    <button id="day7EditBtn" class="secondary hidden">タイミングを変える</button>
   </section>
 
   <section id="day66Card" class="card hidden">
-    <h2>DAY 66｜通知なしでも聴いてた？</h2>
-    <p class="desc">最後の6日間は、66 DAYSからの合図を止めていました。</p>
+    <h2>DAY 66｜通知がなくても聴けた？</h2>
+    <p class="desc">最後の6日間は通知を送りませんでした。いつもの生活の中で、Snow Manを聴くことを思い出せたか振り返ってみましょう。</p>
     <div class="optionList" id="day66Options">
-      <button class="option" data-d66="auto"><strong>何度か自然に再生していた</strong><span>「聴こう」と思う前に、いつもの流れで再生できた日があった。</span></button>
-      <button class="option" data-d66="aware"><strong>思い出したけど、再生しない日もあった</strong><span>合図はできてきている。もう少し同じ場所で続けてもよさそう。</span></button>
-      <button class="option" data-d66="rare"><strong>ほとんど思い出さなかった</strong><span>別の生活場面へ置き直した方が合うかもしれない。</span></button>
+      <button class="option" data-d66="auto"><strong>何度か自然に再生していた</strong><span>通知がなくても、いつもの流れで再生できた日があった。</span></button>
+      <button class="option" data-d66="aware"><strong>思い出したけれど、聴かない日もあった</strong><span>「聴こう」と思い出すことはできた。</span></button>
+      <button class="option" data-d66="rare"><strong>ほとんど思い出さなかった</strong><span>今のタイミングでは習慣になりにくかったかもしれない。</span></button>
     </div>
     <div id="day66Result" class="resultBox hidden"></div>
-    <button id="restartBtn" class="secondary hidden">別のタイミングで設定し直す</button>
+    <button id="restartBtn" class="secondary hidden">別のタイミングで試してみる</button>
   </section>
 
   <section id="calendarSetup" class="card">
     <h2>まず「66 DAYS」専用カレンダーを作る</h2>
-    <p class="desc">あとで設定を変えたり、企画をやめたりするとき、このカレンダーごと削除できるようにします。</p>
+    <p class="desc">あとで設定を変えたくなったとき、予定を1件ずつ消さずにまとめて削除できるよう、専用カレンダーを作ります。</p>
 
     <div class="tabs">
       <button class="tab active" data-platform="iphone">iPhone / iPad</button>
@@ -183,7 +183,7 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
         <li>保存先は <b>iCloud</b> の自分用アカウントがおすすめ</li>
         <li>「完了」で保存</li>
       </ol>
-      <div class="note">「家族」「職場」など共有カレンダーは避けて、自分だけのカレンダーとして作るのがおすすめです。</div>
+      <div class="note">「家族」「職場」など、ほかの人と共有しているカレンダーは避けて、自分だけが使うカレンダーとして作るのがおすすめです。</div>
     </div>
 
     <div id="androidBox" class="platformBox hidden">
@@ -208,7 +208,7 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
   <section id="setup">
     <div class="card">
       <h2>① いつ聴く？</h2>
-      <p class="desc">すでにある生活の動作にくっつけます。</p>
+      <p class="desc">普段からしていることとセットにすると、思い出しやすくなります。</p>
       <div class="grid" id="cueGrid">
         <button class="choice" data-cue="朝の支度を始めたら">☀️ 朝の支度</button>
         <button class="choice" data-cue="通勤・通学を始めたら">🚃 通勤・通学</button>
@@ -225,7 +225,7 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 
     <div class="card">
       <h2>② 何を聴く？</h2>
-      <p class="desc">毎回選ばなくていい「いつもの入口」を1つ決めます。</p>
+      <p class="desc">毎回「何を聴こう？」と迷わなくていいように、すぐ開ける再生先を1つ決めます。</p>
       <div class="serviceGrid" id="serviceGrid" style="margin-top:12px">
         <button class="service active" data-service="Apple Music">Apple Music</button>
         <button class="service" data-service="Spotify">Spotify</button>
@@ -234,24 +234,24 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       </div>
       <label>再生ページのURL <span class="small">（任意）</span></label>
       <input id="playUrl" type="url" inputmode="url" placeholder="https://...">
-      <div class="note"><b>1曲だけでもOK。</b>「たくさん聴く」より、いつもの場面で自然に再生を始めることを優先します。</div>
+      <div class="note"><b>1曲だけでもOK。</b>長く聴くことより、決めたタイミングで再生を始めることを優先します。</div>
     </div>
 
     <div class="card">
-      <h2>③ 合図の時刻を決める</h2>
-      <p class="desc">その行動をしそうな頃の時刻でOK。合図は66日間ずっと同じ頻度では出ません。</p>
-      <label>合図の時刻</label>
+      <h2>③ 通知の時刻を決める</h2>
+      <p class="desc">選んだ行動をしそうな時刻でOKです。通知は、慣れてくるにつれて少しずつ減っていきます。</p>
+      <label>通知の時刻</label>
       <input id="time" type="time" value="19:00">
       <label>開始日</label>
       <input id="date" type="date">
 
       <div class="plan">
-        <div class="planRow"><div class="planDay">DAY 1–14</div><div class="planText">毎日。まず「この場面＝再生」を作る。</div></div>
-        <div class="planRow"><div class="planDay">DAY 15–28</div><div class="planText">2日に1回。合図がない日にも思い出せるか試す。</div></div>
-        <div class="planRow"><div class="planDay">DAY 29–45</div><div class="planText">3日に1回。「頑張って思い出す」から離れていく。</div></div>
-        <div class="planRow"><div class="planDay">DAY 46–59</div><div class="planText">週1回。生活そのものが合図になってきたかを見る。</div></div>
-        <div class="planRow silent"><div class="planDay">DAY 60–65</div><div class="planText"><b>通知なし。</b>あえて何も言わない6日間。</div></div>
-        <div class="planRow last"><div class="planDay">DAY 66</div><div class="planText">「通知なしでも聴いてた？」だけ確認。</div></div>
+        <div class="planRow"><div class="planDay">DAY 1–14</div><div class="planText">毎日通知。まずは、決めたタイミングで再生することに慣れます。</div></div>
+        <div class="planRow"><div class="planDay">DAY 15–28</div><div class="planText">2日に1回。通知がない日にも思い出せるか試します。</div></div>
+        <div class="planRow"><div class="planDay">DAY 29–45</div><div class="planText">3日に1回。通知に頼らず再生できる日を増やします。</div></div>
+        <div class="planRow"><div class="planDay">DAY 46–59</div><div class="planText">週1回。通知がなくても自然に再生できているか確認します。</div></div>
+        <div class="planRow silent"><div class="planDay">DAY 60–65</div><div class="planText"><b>通知なし。</b>6日間、完全に自分だけで試します。</div></div>
+        <div class="planRow last"><div class="planDay">DAY 66</div><div class="planText">最後に「通知がなくても聴けた？」を確認します。</div></div>
       </div>
 
       <button id="createBtn" class="primary" disabled>私の66 DAYSを作る</button>
@@ -261,11 +261,11 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 
   <section id="result" class="card hidden">
     <h2>準備できました</h2>
-    <p class="desc">下のファイルには、だんだん減っていく合図とDAY 7・DAY 66の確認がまとめて入っています。</p>
+    <p class="desc">下の予定ファイルをカレンダーに追加すると、通知が少しずつ減っていく66日分の予定が入ります。DAY 7とDAY 66には振り返りも入っています。</p>
 
     <div id="summary" class="summary"></div>
 
-    <button id="downloadBtn" class="download">📅 66 DAYSの予定ファイルを作る</button>
+    <button id="downloadBtn" class="download">📅 66 DAYSの予定をカレンダーに追加する</button>
     <button id="playBtn" class="play hidden">▶︎ 今、1曲だけ聴いてみる</button>
 
     <div class="warning">
@@ -293,8 +293,8 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
     </div>
 
     <div class="success">
-      <b>設定直後に1曲だけ流してみるのがおすすめ。</b><br>
-      「明日から始める」ではなく、今ここで最初の1回を済ませてしまうと、生活の中へ置く感覚がつかみやすくなります。
+      <b>カレンダーの登録が終わったら、そのまま1曲だけ聴いてみるのがおすすめです。</b><br>
+      最初の1回をその場で済ませておくと、「このタイミングで聴く」を始めやすくなります。
     </div>
 
     <button id="editBtn" class="secondary">設定を変える</button>
@@ -410,9 +410,9 @@ function renderResult(){
 
   $('#summary').innerHTML=`
     <div class="sum"><span class="big">🔗</span><span><b>${escHtml(current.cue)}</b><br>→ Snow Manを1曲再生</span></div>
-    <div class="sum"><span class="big">🎧</span><span>${escHtml(current.service)}${current.url?' の決めたページへ':' を開く'}</span></div>
+    <div class="sum"><span class="big">🎧</span><span>${escHtml(current.service)}${current.url?'：登録した再生ページ':'を使う'}</span></div>
     <div class="sum"><span class="big">⏰</span><span>${escHtml(current.time)}ごろ／${escHtml(current.date)}開始</span></div>
-    <div class="sum"><span class="big">🌱</span><span>毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間なし → DAY 66確認</span></div>
+    <div class="sum"><span class="big">🌱</span><span>毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間通知なし → DAY 66に振り返り</span></div>
   `;
   $('#playBtn').classList.toggle('hidden',!current.url);
   $('#result').scrollIntoView({behavior:'smooth',block:'start'});
@@ -469,13 +469,13 @@ $$('[data-d7]').forEach(btn=>{
     $$('[data-d7]').forEach(x=>x.classList.toggle('active',x===btn));
     $('#day7Result').classList.remove('hidden');
     if(v==='good'){
-      $('#day7Result').innerHTML='<strong>そのままでOK。</strong><br>今の生活場面を、もう少し同じ形で繰り返してみてください。';
+      $('#day7Result').innerHTML='<strong>今の設定で続けてみましょう。</strong><br>次からは通知が少しずつ減っていきます。';
       $('#day7EditBtn').classList.add('hidden');
     }else if(v==='forget'){
-      $('#day7Result').innerHTML='<strong>意志の問題というより、合図が弱いかもしれません。</strong><br>通知時刻を少し動かすか、もっと毎日必ず起きる行動へ置き直してみるのがおすすめです。';
+      $('#day7Result').innerHTML='<strong>今の通知が、生活の流れに合っていないのかもしれません。</strong><br>通知の時刻を変えるか、「歯みがきのあと」「通勤を始めたとき」など、毎日ほぼ必ずある行動に合わせてみてください。';
       $('#day7EditBtn').classList.remove('hidden');
     }else{
-      $('#day7Result').innerHTML='<strong>置く場所を変えて大丈夫。</strong><br>その時間帯に聴けないなら、続けにくくて当然です。別の生活場面を選び直してみてください。';
+      $('#day7Result').innerHTML='<strong>タイミングを変えてみましょう。</strong><br>聴きにくい時間に無理に合わせる必要はありません。普段の生活で自然に音楽を流せる時間を選び直してみてください。';
       $('#day7EditBtn').classList.remove('hidden');
     }
   };
@@ -487,13 +487,13 @@ $$('[data-d66]').forEach(btn=>{
     $$('[data-d66]').forEach(x=>x.classList.toggle('active',x===btn));
     $('#day66Result').classList.remove('hidden');
     if(v==='auto'){
-      $('#day66Result').innerHTML='<strong>生活の中にSnow Manの居場所ができました。</strong><br>ここからは66 DAYSの通知なしで、そのまま続けてみてください。「66 DAYS」カレンダーは削除して卒業してOKです。';
+      $('#day66Result').innerHTML='<strong>かなり定着してきています。</strong><br>66 DAYSの通知はここで終了です。「66 DAYS」カレンダーは削除して、これからは通知なしで続けてみてください。';
       $('#restartBtn').classList.add('hidden');
     }else if(v==='aware'){
-      $('#day66Result').innerHTML='<strong>合図は育っています。</strong><br>完全に自動ではなくても、「思い出す」まで来ています。同じ生活場面でもう少し続けるのがよさそうです。';
+      $('#day66Result').innerHTML='<strong>もう少しで定着しそうです。</strong><br>「聴こう」と思い出せるところまでは来ています。今のタイミングで、もうしばらく続けてみてください。';
       $('#restartBtn').classList.add('hidden');
     }else{
-      $('#day66Result').innerHTML='<strong>別の場所なら合うかもしれません。</strong><br>66日続かなかった＝失敗ではありません。再生を置く生活場面そのものを変えて、もう一度だけ試してみてもOKです。';
+      $('#day66Result').innerHTML='<strong>今のタイミングが、生活に合っていなかったのかもしれません。</strong><br>別の時間や行動に変えて、もう一度試してみるのもOKです。';
       $('#restartBtn').classList.remove('hidden');
     }
   };
@@ -531,15 +531,15 @@ function listenDays(){
 }
 function phaseMessage(day){
   if(day<=14){
-    return 'いつもの時間です。Snow Manを1曲だけ流してみよう。';
+    return 'Snow Manを1曲だけ。いつものタイミングで再生してみよう。';
   }
   if(day<=28){
-    return '今日は66 DAYSからの合図。まず1曲だけ。';
+    return '今日は通知の日。Snow Manを1曲だけ再生してみよう。';
   }
   if(day<=45){
-    return '今日はまだ、合図ありの日。通知がない日に思い出せたら、それが変化です。';
+    return '今日は通知あり。通知がない日にも思い出せたら順調です。';
   }
-  return '久しぶりの合図です。最近、言われなくても聴いてた？';
+  return '久しぶりの通知です。最近、通知がない日にも聴けていますか？';
 }
 function makeEvent(day,type){
   const iso=addDays(current.date,day-1);
@@ -548,20 +548,20 @@ function makeEvent(day,type){
 
   let summary, desc, url='';
   if(type==='day7'){
-    summary='66 DAYS｜このタイミング、合ってる？';
+    summary='66 DAYS｜1週間やってみてどう？';
     desc=[
       'DAY 7 / 66',
-      '1週間やってみて、このタイミングが生活に合っているかだけ確認。',
-      '続けにくければ、置く場所を変えてOK。',
+      '今のタイミングが続けやすいか、1分だけ確認してみましょう。',
+      '合わなければ、設定を変えてOKです。',
       `確認ページ：${checkinUrl(7)}`
     ].join('\n');
     url=checkinUrl(7);
   }else if(type==='final'){
-    summary='66 DAYS｜通知なしでも聴いてた？';
+    summary='66 DAYS｜通知がなくても聴けた？';
     desc=[
       'DAY 66 / 66',
-      'この6日間、66 DAYSからの合図はありませんでした。',
-      'それでもSnow Manを再生した日はありましたか？',
+      '最後の6日間は通知なしでした。',
+      'それでもSnow Manを聴くことを思い出せましたか？',
       `確認ページ：${checkinUrl(66)}`
     ].join('\n');
     url=checkinUrl(66);
@@ -570,8 +570,8 @@ function makeEvent(day,type){
     desc=[
       `DAY ${day} / 66`,
       phaseMessage(day),
-      `${current.cue} → Snow Manを1曲再生。`,
-      '1曲だけでもOK。完璧に続けなくて大丈夫。',
+      `${current.cue}、Snow Manを1曲再生。`,
+      '1曲だけでもOK。毎日完璧に続けなくて大丈夫です。',
       current.url?`再生ページ：${current.url}`:`${current.service}を開いて再生。`
     ].join('\n');
     url=current.url||'';
