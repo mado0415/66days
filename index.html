@@ -108,6 +108,19 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
   border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;
   padding:11px 13px;font-weight:800;margin-top:9px;width:100%
 }
+.optionList{display:grid;gap:8px;margin-top:12px}
+.option{
+  border:1px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:15px;padding:13px;text-align:left
+}
+.option strong{display:block;font-size:13px}
+.option span{display:block;font-size:11px;color:var(--sub);margin-top:4px;line-height:1.5}
+.option.active{background:var(--accent2);border-color:#6fcbe9}
+.resultBox{
+  margin-top:12px;padding:14px;border-radius:16px;background:#f7fbfc;border:1px solid #e0edf2;
+  font-size:13px;line-height:1.65
+}
+.resultBox strong{font-size:15px}
 .details{font-size:11px;line-height:1.7;color:var(--sub);margin-top:9px}
 .toast{
   position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(10px);
@@ -125,6 +138,30 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
     <h1>Snow Manを<br>生活の中に置いてみる</h1>
     <p>毎日このページへ来る企画ではありません。最初に一度だけ、生活の中へ「聴くきっかけ」を仕込みます。</p>
     <div class="rule">最初は合図に助けてもらう。少しずつ減らす。最後は、合図なしで聴けるか試してみる。</div>
+  </section>
+
+  <section id="day7Card" class="card hidden">
+    <h2>DAY 7｜このタイミング、合ってる？</h2>
+    <p class="desc">1週間やってみた今の感覚を選んでください。合わなければ、ここで置き場所を変えて大丈夫です。</p>
+    <div class="optionList" id="day7Options">
+      <button class="option" data-d7="good"><strong>このタイミングなら続けられそう</strong><span>今のまま続けます。</span></button>
+      <button class="option" data-d7="forget"><strong>忘れることが多かった</strong><span>通知の時刻を少し変える、またはもっと目につく生活場面に変えるのがおすすめ。</span></button>
+      <button class="option" data-d7="mismatch"><strong>そもそもこの時間に聴けなかった</strong><span>「続けられない」のではなく、置く場所が合っていない可能性があります。</span></button>
+    </div>
+    <div id="day7Result" class="resultBox hidden"></div>
+    <button id="day7EditBtn" class="secondary hidden">タイミングを設定し直す</button>
+  </section>
+
+  <section id="day66Card" class="card hidden">
+    <h2>DAY 66｜通知なしでも聴いてた？</h2>
+    <p class="desc">最後の6日間は、66 DAYSからの合図を止めていました。</p>
+    <div class="optionList" id="day66Options">
+      <button class="option" data-d66="auto"><strong>何度か自然に再生していた</strong><span>「聴こう」と思う前に、いつもの流れで再生できた日があった。</span></button>
+      <button class="option" data-d66="aware"><strong>思い出したけど、再生しない日もあった</strong><span>合図はできてきている。もう少し同じ場所で続けてもよさそう。</span></button>
+      <button class="option" data-d66="rare"><strong>ほとんど思い出さなかった</strong><span>別の生活場面へ置き直した方が合うかもしれない。</span></button>
+    </div>
+    <div id="day66Result" class="resultBox hidden"></div>
+    <button id="restartBtn" class="secondary hidden">別のタイミングで設定し直す</button>
   </section>
 
   <section id="calendarSetup" class="card">
@@ -224,12 +261,12 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 
   <section id="result" class="card hidden">
     <h2>準備できました</h2>
-    <p class="desc">下のファイルには、だんだん減っていく合図がまとめて入っています。</p>
+    <p class="desc">下のファイルには、だんだん減っていく合図とDAY 7・DAY 66の確認がまとめて入っています。</p>
 
     <div id="summary" class="summary"></div>
 
     <button id="downloadBtn" class="download">📅 66 DAYSの予定ファイルを作る</button>
-    <button id="playBtn" class="play hidden">▶︎ 今すぐ再生してみる</button>
+    <button id="playBtn" class="play hidden">▶︎ 今、1曲だけ聴いてみる</button>
 
     <div class="warning">
       <b>大事：予定を追加するとき</b><br>
@@ -256,8 +293,8 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
     </div>
 
     <div class="success">
-      <b>設定を変えたくなったら簡単です。</b><br>
-      カレンダー一覧から「66 DAYS」を削除 → 新しく作り直す → このページで新しい設定を登録、でOKです。古い合図を1件ずつ消す必要はありません。
+      <b>設定直後に1曲だけ流してみるのがおすすめ。</b><br>
+      「明日から始める」ではなく、今ここで最初の1回を済ませてしまうと、生活の中へ置く感覚がつかみやすくなります。
     </div>
 
     <button id="editBtn" class="secondary">設定を変える</button>
@@ -267,6 +304,7 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 <div id="toast" class="toast"></div>
 
 <script>
+const STORAGE_KEY='snow66days_v5';
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
 
@@ -286,7 +324,27 @@ function escHtml(s=''){
 }
 function toast(t){
   const e=$('#toast');e.textContent=t;e.classList.add('show');
-  setTimeout(()=>e.classList.remove('show'),1600);
+  setTimeout(()=>e.classList.remove('show'),1700);
+}
+function saveCurrent(){
+  if(current) localStorage.setItem(STORAGE_KEY,JSON.stringify(current));
+}
+function loadCurrent(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw) current=JSON.parse(raw);
+  }catch(e){}
+}
+function basePageUrl(){
+  const u=new URL(window.location.href);
+  u.search='';
+  u.hash='';
+  return u.toString();
+}
+function checkinUrl(day){
+  const u=new URL(basePageUrl());
+  u.searchParams.set('checkin',String(day));
+  return u.toString();
 }
 
 $$('.tab').forEach(btn=>{
@@ -338,6 +396,7 @@ function build(){
 $('#createBtn').onclick=()=>{
   current=build();
   if(!current)return;
+  saveCurrent();
   renderResult();
 };
 
@@ -353,22 +412,92 @@ function renderResult(){
     <div class="sum"><span class="big">🔗</span><span><b>${escHtml(current.cue)}</b><br>→ Snow Manを1曲再生</span></div>
     <div class="sum"><span class="big">🎧</span><span>${escHtml(current.service)}${current.url?' の決めたページへ':' を開く'}</span></div>
     <div class="sum"><span class="big">⏰</span><span>${escHtml(current.time)}ごろ／${escHtml(current.date)}開始</span></div>
-    <div class="sum"><span class="big">🌱</span><span>合図は毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間なし → DAY 66確認</span></div>
+    <div class="sum"><span class="big">🌱</span><span>毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間なし → DAY 66確認</span></div>
   `;
   $('#playBtn').classList.toggle('hidden',!current.url);
   $('#result').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-$('#editBtn').onclick=()=>{
+function restoreFormFromCurrent(){
+  if(!current) return;
+  platform=current.platform||'iphone';
+  $$('.tab').forEach(x=>x.classList.toggle('active',x.dataset.platform===platform));
+  $('#iphoneBox').classList.toggle('hidden',platform!=='iphone');
+  $('#androidBox').classList.toggle('hidden',platform!=='android');
+
+  cue=current.cue||'';
+  const preset=$$('.choice').find(x=>x.dataset.cue===cue);
+  if(preset){
+    $$('.choice').forEach(x=>x.classList.toggle('active',x===preset));
+    $('#customCue').value='';
+  }else{
+    $$('.choice').forEach(x=>x.classList.remove('active'));
+    $('#customCue').value=cue;
+  }
+
+  service=current.service||'Apple Music';
+  $$('.service').forEach(x=>x.classList.toggle('active',x.dataset.service===service));
+  $('#playUrl').value=current.url||'';
+  $('#date').value=current.date||isoToday();
+  $('#time').value=current.time||'19:00';
+
+  $('#calendarDone').checked=true;
+  $('#createBtn').disabled=false;
+  $('#disabledHint').classList.add('hidden');
+}
+
+function goEdit(){
+  restoreFormFromCurrent();
   $('#result').classList.add('hidden');
+  $('#day7Card').classList.add('hidden');
+  $('#day66Card').classList.add('hidden');
   $('#calendarSetup').classList.remove('hidden');
   $('#setup').classList.remove('hidden');
   window.scrollTo({top:0,behavior:'smooth'});
-};
+}
+$('#editBtn').onclick=goEdit;
+$('#day7EditBtn').onclick=goEdit;
+$('#restartBtn').onclick=goEdit;
 
 $('#playBtn').onclick=()=>{
   if(current?.url) window.open(current.url,'_blank','noopener');
 };
+
+$$('[data-d7]').forEach(btn=>{
+  btn.onclick=()=>{
+    const v=btn.dataset.d7;
+    $$('[data-d7]').forEach(x=>x.classList.toggle('active',x===btn));
+    $('#day7Result').classList.remove('hidden');
+    if(v==='good'){
+      $('#day7Result').innerHTML='<strong>そのままでOK。</strong><br>今の生活場面を、もう少し同じ形で繰り返してみてください。';
+      $('#day7EditBtn').classList.add('hidden');
+    }else if(v==='forget'){
+      $('#day7Result').innerHTML='<strong>意志の問題というより、合図が弱いかもしれません。</strong><br>通知時刻を少し動かすか、もっと毎日必ず起きる行動へ置き直してみるのがおすすめです。';
+      $('#day7EditBtn').classList.remove('hidden');
+    }else{
+      $('#day7Result').innerHTML='<strong>置く場所を変えて大丈夫。</strong><br>その時間帯に聴けないなら、続けにくくて当然です。別の生活場面を選び直してみてください。';
+      $('#day7EditBtn').classList.remove('hidden');
+    }
+  };
+});
+
+$$('[data-d66]').forEach(btn=>{
+  btn.onclick=()=>{
+    const v=btn.dataset.d66;
+    $$('[data-d66]').forEach(x=>x.classList.toggle('active',x===btn));
+    $('#day66Result').classList.remove('hidden');
+    if(v==='auto'){
+      $('#day66Result').innerHTML='<strong>生活の中にSnow Manの居場所ができました。</strong><br>ここからは66 DAYSの通知なしで、そのまま続けてみてください。「66 DAYS」カレンダーは削除して卒業してOKです。';
+      $('#restartBtn').classList.add('hidden');
+    }else if(v==='aware'){
+      $('#day66Result').innerHTML='<strong>合図は育っています。</strong><br>完全に自動ではなくても、「思い出す」まで来ています。同じ生活場面でもう少し続けるのがよさそうです。';
+      $('#restartBtn').classList.add('hidden');
+    }else{
+      $('#day66Result').innerHTML='<strong>別の場所なら合うかもしれません。</strong><br>66日続かなかった＝失敗ではありません。再生を置く生活場面そのものを変えて、もう一度だけ試してみてもOKです。';
+      $('#restartBtn').classList.remove('hidden');
+    }
+  };
+});
 
 function addDays(iso,n){
   const [y,m,d]=iso.split('-').map(Number);
@@ -400,24 +529,47 @@ function listenDays(){
   for(let d=46;d<=59;d+=7) set.add(d);
   return [...set].sort((a,b)=>a-b);
 }
+function phaseMessage(day){
+  if(day<=14){
+    return 'いつもの時間です。Snow Manを1曲だけ流してみよう。';
+  }
+  if(day<=28){
+    return '今日は66 DAYSからの合図。まず1曲だけ。';
+  }
+  if(day<=45){
+    return '今日はまだ、合図ありの日。通知がない日に思い出せたら、それが変化です。';
+  }
+  return '久しぶりの合図です。最近、言われなくても聴いてた？';
+}
 function makeEvent(day,type){
   const iso=addDays(current.date,day-1);
   const start=dtLocal(iso,current.time);
   const end=plusMinutes(iso,current.time,10);
 
   let summary, desc, url='';
-  if(type==='final'){
+  if(type==='day7'){
+    summary='66 DAYS｜このタイミング、合ってる？';
+    desc=[
+      'DAY 7 / 66',
+      '1週間やってみて、このタイミングが生活に合っているかだけ確認。',
+      '続けにくければ、置く場所を変えてOK。',
+      `確認ページ：${checkinUrl(7)}`
+    ].join('\n');
+    url=checkinUrl(7);
+  }else if(type==='final'){
     summary='66 DAYS｜通知なしでも聴いてた？';
     desc=[
       'DAY 66 / 66',
       'この6日間、66 DAYSからの合図はありませんでした。',
       'それでもSnow Manを再生した日はありましたか？',
-      'あったなら、生活の中に「聴く場所」ができてきたサインです。'
+      `確認ページ：${checkinUrl(66)}`
     ].join('\n');
+    url=checkinUrl(66);
   }else{
     summary='66 DAYS｜Snow Manを1曲だけ';
     desc=[
       `DAY ${day} / 66`,
+      phaseMessage(day),
       `${current.cue} → Snow Manを1曲再生。`,
       '1曲だけでもOK。完璧に続けなくて大丈夫。',
       current.url?`再生ページ：${current.url}`:`${current.service}を開いて再生。`
@@ -445,6 +597,7 @@ function makeEvent(day,type){
 function makeICS(){
   const events=[];
   listenDays().forEach(day=>events.push(makeEvent(day,'listen')));
+  events.push(makeEvent(7,'day7'));
   events.push(makeEvent(66,'final'));
   return [
     'BEGIN:VCALENDAR',
@@ -468,6 +621,33 @@ $('#downloadBtn').onclick=()=>{
   setTimeout(()=>URL.revokeObjectURL(url),1500);
   toast('予定ファイルを作りました');
 };
+
+function handleCheckinQuery(){
+  const params=new URLSearchParams(location.search);
+  const checkin=params.get('checkin');
+  if(!checkin) return false;
+
+  loadCurrent();
+  $('#calendarSetup').classList.add('hidden');
+  $('#setup').classList.add('hidden');
+  $('#result').classList.add('hidden');
+
+  if(checkin==='7'){
+    $('#day7Card').classList.remove('hidden');
+    $('#day66Card').classList.add('hidden');
+    $('#day7Card').scrollIntoView({behavior:'smooth',block:'start'});
+    return true;
+  }
+  if(checkin==='66'){
+    $('#day66Card').classList.remove('hidden');
+    $('#day7Card').classList.add('hidden');
+    $('#day66Card').scrollIntoView({behavior:'smooth',block:'start'});
+    return true;
+  }
+  return false;
+}
+
+handleCheckinQuery();
 </script>
 </body>
 </html>
