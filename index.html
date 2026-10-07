@@ -9,14 +9,17 @@
 :root{
   --bg:#f5fafc;--card:#fff;--ink:#18323e;--sub:#6d8590;
   --line:#dce9ee;--accent:#8edcf6;--accent2:#e4f7fd;
-  --green:#edf9f1;--greenInk:#376b49;--shadow:0 9px 28px rgba(46,86,103,.08)
+  --green:#edf9f1;--greenInk:#376b49;--sand:#fff8e9;
+  --shadow:0 9px 28px rgba(46,86,103,.08)
 }
 *{box-sizing:border-box}
 body{
-  margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
-  background:radial-gradient(circle at 8% 0,#e2f7ff 0,transparent 28%),var(--bg);color:var(--ink)
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  background:radial-gradient(circle at 8% 0,#e2f7ff 0,transparent 28%),var(--bg);
+  color:var(--ink)
 }
-button,input,select{font:inherit}
+button,input{font:inherit}
 button{cursor:pointer}
 .wrap{max-width:720px;margin:auto;padding:18px 15px 70px}
 .hero,.card{background:var(--card);border:1px solid #e0ebef;box-shadow:var(--shadow)}
@@ -25,15 +28,29 @@ button{cursor:pointer}
 .kicker{font-size:12px;letter-spacing:.18em;font-weight:900;color:#5894aa}
 h1{font-size:29px;line-height:1.18;letter-spacing:-.03em;margin:8px 0 12px}
 h2{font-size:18px;margin:0 0 6px}
+h3{font-size:15px;margin:0 0 7px}
 p{line-height:1.7}
 .hero p,.desc,.small{font-size:12px;color:var(--sub);margin:0}
 .rule{margin-top:15px;padding:12px 13px;border-radius:14px;background:#fff;border:1px solid #deedf2;font-size:13px;font-weight:800;line-height:1.6}
-label{display:block;font-size:13px;font-weight:800;margin:14px 0 7px}
-input,select{
-  width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;
-  padding:13px 14px;color:var(--ink);outline:none
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.tab{
+  border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 8px;
+  font-weight:900;color:var(--ink)
 }
-input:focus,select:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
+.tab.active{background:var(--accent2);border-color:#6fcbe9}
+.platformBox{
+  margin-top:10px;background:#f8fbfc;border:1px solid #e4eef2;
+  border-radius:16px;padding:14px
+}
+.steps{margin:8px 0 0;padding-left:21px;font-size:12px;color:#526f7a;line-height:1.8}
+.steps b{color:var(--ink)}
+.doneBox{
+  margin-top:13px;padding:12px;border-radius:14px;background:#f4fbfe;
+  border:1px solid #d9eef5
+}
+.checkrow{display:flex;gap:10px;align-items:flex-start}
+.checkrow input{width:20px;height:20px;margin-top:1px}
+.checkrow label{margin:0;font-size:13px;font-weight:800;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
 .choice{
   border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 10px;
@@ -46,16 +63,31 @@ input:focus,select:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,
   font-size:12px;font-weight:800;color:var(--ink)
 }
 .service.active{background:var(--accent2);border-color:#6fcbe9}
+label{display:block;font-size:13px;font-weight:800;margin:14px 0 7px}
+input[type="text"],input[type="url"],input[type="date"],input[type="time"]{
+  width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;
+  padding:13px 14px;color:var(--ink);outline:none
+}
+input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 .note{
   background:#f3fbfe;border-left:4px solid var(--accent);border-radius:12px;
   padding:12px 13px;font-size:12px;color:#4e6c78;line-height:1.65;margin-top:12px
 }
-.primary,.apple,.google,.play{
+.plan{display:grid;gap:8px;margin-top:12px}
+.planRow{
+  display:grid;grid-template-columns:80px 1fr;gap:10px;align-items:center;
+  padding:11px 12px;border:1px solid #e5eef2;border-radius:13px;background:#fafcfd
+}
+.planDay{font-size:12px;font-weight:900;color:#4d8297}
+.planText{font-size:12px;line-height:1.5;color:#546f7b}
+.planRow.silent{background:#f7f7f7}
+.planRow.last{background:var(--sand)}
+.primary,.download,.play{
   width:100%;border:0;border-radius:16px;padding:15px 14px;font-weight:900;margin-top:10px
 }
 .primary{background:var(--ink);color:#fff}
-.apple{background:#111;color:#fff}
-.google{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.primary:disabled{opacity:.35;cursor:not-allowed}
+.download{background:#477f93;color:#fff}
 .play{background:var(--green);color:var(--greenInk);border:1px solid #caead4}
 .hidden{display:none!important}
 .summary{display:grid;gap:8px;margin-top:12px}
@@ -68,11 +100,10 @@ input:focus,select:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,
   background:#fff8e9;border:1px solid #f0e1bd;border-radius:15px;padding:13px 14px;
   font-size:12px;line-height:1.65;margin-top:12px;color:#735e31
 }
-.change{
-  background:#f6f8f9;border-radius:15px;padding:13px 14px;margin-top:12px;
-  font-size:12px;line-height:1.65;color:#59717b
+.success{
+  background:#f0faf3;border:1px solid #d2ead8;border-radius:15px;padding:13px 14px;
+  font-size:12px;line-height:1.65;margin-top:12px;color:#477257
 }
-.change b{color:var(--ink)}
 .secondary{
   border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;
   padding:11px 13px;font-weight:800;margin-top:9px;width:100%
@@ -92,8 +123,49 @@ input:focus,select:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,
   <section class="hero">
     <div class="kicker">66 DAYS</div>
     <h1>Snow Manを<br>生活の中に置いてみる</h1>
-    <p>毎日このページへ来る企画ではありません。最初に一度だけ「いつ聴くか」を決めて、あとは日常へ戻ります。</p>
-    <div class="rule">このページを開かなくても、いつもの流れで再生できるようになることがゴールです。</div>
+    <p>毎日このページへ来る企画ではありません。最初に一度だけ、生活の中へ「聴くきっかけ」を仕込みます。</p>
+    <div class="rule">最初は合図に助けてもらう。少しずつ減らす。最後は、合図なしで聴けるか試してみる。</div>
+  </section>
+
+  <section id="calendarSetup" class="card">
+    <h2>まず「66 DAYS」専用カレンダーを作る</h2>
+    <p class="desc">あとで設定を変えたり、企画をやめたりするとき、このカレンダーごと削除できるようにします。</p>
+
+    <div class="tabs">
+      <button class="tab active" data-platform="iphone">iPhone / iPad</button>
+      <button class="tab" data-platform="android">Android</button>
+    </div>
+
+    <div id="iphoneBox" class="platformBox">
+      <h3>iPhone / iPad</h3>
+      <ol class="steps">
+        <li>「カレンダー」アプリを開く</li>
+        <li>画面下の <b>「カレンダー」</b> をタップ</li>
+        <li><b>「カレンダーを追加」→「カレンダーを追加」</b></li>
+        <li>名前を <b>「66 DAYS」</b> にする</li>
+        <li>保存先は <b>iCloud</b> の自分用アカウントがおすすめ</li>
+        <li>「完了」で保存</li>
+      </ol>
+      <div class="note">「家族」「職場」など共有カレンダーは避けて、自分だけのカレンダーとして作るのがおすすめです。</div>
+    </div>
+
+    <div id="androidBox" class="platformBox hidden">
+      <h3>Android</h3>
+      <ol class="steps">
+        <li>ブラウザで <b>Google カレンダー</b> を開く</li>
+        <li>設定から <b>「カレンダーを追加」→「新しいカレンダーを作成」</b></li>
+        <li>名前を <b>「66 DAYS」</b> にする</li>
+        <li>作成後、Google カレンダーアプリにも表示されることを確認</li>
+      </ol>
+      <div class="note">Android版Googleカレンダーアプリだけでは新規カレンダー作成が出ないことがあります。その場合はブラウザ版から作成してください。</div>
+    </div>
+
+    <div class="doneBox">
+      <div class="checkrow">
+        <input id="calendarDone" type="checkbox">
+        <label for="calendarDone">「66 DAYS」という専用カレンダーを作りました</label>
+      </div>
+    </div>
   </section>
 
   <section id="setup">
@@ -129,50 +201,76 @@ input:focus,select:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,
     </div>
 
     <div class="card">
-      <h2>③ 合図を1本だけ作る</h2>
-      <p class="desc">66個の予定ではなく、66日で自動終了する「1つの定期予定」にします。</p>
+      <h2>③ 合図の時刻を決める</h2>
+      <p class="desc">その行動をしそうな頃の時刻でOK。合図は66日間ずっと同じ頻度では出ません。</p>
       <label>合図の時刻</label>
       <input id="time" type="time" value="19:00">
       <label>開始日</label>
       <input id="date" type="date">
-      <div class="note">合図は毎日出ます。ただし、もう自然に再生できるようになったら、66日を待たずに通知を削除してOK。それがむしろ卒業です。</div>
-      <button id="createBtn" class="primary">私の66 DAYSを作る</button>
+
+      <div class="plan">
+        <div class="planRow"><div class="planDay">DAY 1–14</div><div class="planText">毎日。まず「この場面＝再生」を作る。</div></div>
+        <div class="planRow"><div class="planDay">DAY 15–28</div><div class="planText">2日に1回。合図がない日にも思い出せるか試す。</div></div>
+        <div class="planRow"><div class="planDay">DAY 29–45</div><div class="planText">3日に1回。「頑張って思い出す」から離れていく。</div></div>
+        <div class="planRow"><div class="planDay">DAY 46–59</div><div class="planText">週1回。生活そのものが合図になってきたかを見る。</div></div>
+        <div class="planRow silent"><div class="planDay">DAY 60–65</div><div class="planText"><b>通知なし。</b>あえて何も言わない6日間。</div></div>
+        <div class="planRow last"><div class="planDay">DAY 66</div><div class="planText">「通知なしでも聴いてた？」だけ確認。</div></div>
+      </div>
+
+      <button id="createBtn" class="primary" disabled>私の66 DAYSを作る</button>
+      <p id="disabledHint" class="details">↑ 先に「66 DAYS」専用カレンダーを作って、上のチェックを入れてください。</p>
     </div>
   </section>
 
   <section id="result" class="card hidden">
     <h2>準備できました</h2>
-    <p class="desc">カレンダーには「66日間だけ続く1本の定期予定」を追加します。</p>
+    <p class="desc">下のファイルには、だんだん減っていく合図がまとめて入っています。</p>
+
     <div id="summary" class="summary"></div>
 
-    <button id="appleBtn" class="apple"> iPhone / iPad に追加</button>
-    <button id="googleBtn" class="google">Google カレンダーで追加</button>
+    <button id="downloadBtn" class="download">📅 66 DAYSの予定ファイルを作る</button>
     <button id="playBtn" class="play hidden">▶︎ 今すぐ再生してみる</button>
 
     <div class="warning">
-      <b>設定を変えたくなったら</b><br>
-      ページの設定を書き換えるだけでは、カレンダー側の古い予定は変わりません。<br>
-      ただし今度は削除するのは1本だけです。カレンダーで「66 DAYS｜Snow Manを1曲」を開き、<b>今後の予定をまとめて削除</b>してから、新しい設定で登録し直してください。
+      <b>大事：予定を追加するとき</b><br>
+      保存先のカレンダーを選ぶ画面が出たら、必ずさっき作った <b>「66 DAYS」</b> を選んでください。
     </div>
 
-    <div class="change">
-      <b>通知がもう要らなくなったら、それも成功。</b><br>
-      「朝の支度をしたら勝手にSnow Manを流す」など、カレンダーより生活の動作の方が強い合図になった時点で削除して構いません。
+    <div id="iphoneImport" class="platformBox">
+      <h3>iPhone / iPadで追加するとき</h3>
+      <ol class="steps">
+        <li>上のボタンから予定ファイルを開く</li>
+        <li>カレンダー追加画面で、保存先を <b>「66 DAYS」</b> にする</li>
+        <li>追加を確定する</li>
+      </ol>
+    </div>
+
+    <div id="androidImport" class="platformBox hidden">
+      <h3>Androidで追加するとき</h3>
+      <ol class="steps">
+        <li>上のボタンから予定ファイルを保存</li>
+        <li>ブラウザ版Googleカレンダーの <b>設定 → インポート / エクスポート</b> を開く</li>
+        <li>保存したファイルを選ぶ</li>
+        <li>追加先カレンダーを <b>「66 DAYS」</b> にしてインポート</li>
+      </ol>
+    </div>
+
+    <div class="success">
+      <b>設定を変えたくなったら簡単です。</b><br>
+      カレンダー一覧から「66 DAYS」を削除 → 新しく作り直す → このページで新しい設定を登録、でOKです。古い合図を1件ずつ消す必要はありません。
     </div>
 
     <button id="editBtn" class="secondary">設定を変える</button>
-    <p class="details">※ Google カレンダーの登録画面では、端末・アカウント側の既定の通知設定が適用されます。通知がオフの場合は、保存後に予定の通知をオンにしてください。</p>
   </section>
 </div>
+
 <div id="toast" class="toast"></div>
 
 <script>
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
-const dateEl=$('#date');
-const timeEl=$('#time');
-const playUrl=$('#playUrl');
-const customCue=$('#customCue');
+
+let platform='iphone';
 let cue='';
 let service='Apple Music';
 let current=null;
@@ -181,23 +279,41 @@ function isoToday(){
   const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-dateEl.value=isoToday();
+$('#date').value=isoToday();
 
 function escHtml(s=''){
   return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 function toast(t){
-  const e=$('#toast'); e.textContent=t; e.classList.add('show');
+  const e=$('#toast');e.textContent=t;e.classList.add('show');
   setTimeout(()=>e.classList.remove('show'),1600);
 }
+
+$$('.tab').forEach(btn=>{
+  btn.onclick=()=>{
+    platform=btn.dataset.platform;
+    $$('.tab').forEach(x=>x.classList.toggle('active',x===btn));
+    $('#iphoneBox').classList.toggle('hidden',platform!=='iphone');
+    $('#androidBox').classList.toggle('hidden',platform!=='android');
+    $('#iphoneImport').classList.toggle('hidden',platform!=='iphone');
+    $('#androidImport').classList.toggle('hidden',platform!=='android');
+  };
+});
+
+$('#calendarDone').onchange=()=>{
+  const ok=$('#calendarDone').checked;
+  $('#createBtn').disabled=!ok;
+  $('#disabledHint').classList.toggle('hidden',ok);
+};
+
 $$('.choice').forEach(b=>b.onclick=()=>{
   cue=b.dataset.cue;
-  customCue.value='';
+  $('#customCue').value='';
   $$('.choice').forEach(x=>x.classList.toggle('active',x===b));
 });
-customCue.oninput=()=>{
-  if(customCue.value.trim()){
-    cue=customCue.value.trim();
+$('#customCue').oninput=()=>{
+  if($('#customCue').value.trim()){
+    cue=$('#customCue').value.trim();
     $$('.choice').forEach(x=>x.classList.remove('active'));
   }
 };
@@ -207,113 +323,151 @@ $$('.service').forEach(b=>b.onclick=()=>{
 });
 
 function build(){
-  const c=(customCue.value.trim()||cue).trim();
-  if(!c){toast('「いつ聴くか」を選んでください'); return null;}
+  const c=($('#customCue').value.trim()||cue).trim();
+  if(!c){toast('「いつ聴くか」を選んでください');return null;}
   return {
-    cue:c, service,
-    url:playUrl.value.trim(),
-    date:dateEl.value||isoToday(),
-    time:timeEl.value||'19:00'
+    platform,
+    cue:c,
+    service,
+    url:$('#playUrl').value.trim(),
+    date:$('#date').value||isoToday(),
+    time:$('#time').value||'19:00'
   };
 }
+
 $('#createBtn').onclick=()=>{
   current=build();
-  if(!current) return;
-  render();
+  if(!current)return;
+  renderResult();
 };
-function render(){
+
+function renderResult(){
   $('#setup').classList.add('hidden');
+  $('#calendarSetup').classList.add('hidden');
   $('#result').classList.remove('hidden');
+
+  $('#iphoneImport').classList.toggle('hidden',current.platform!=='iphone');
+  $('#androidImport').classList.toggle('hidden',current.platform!=='android');
+
   $('#summary').innerHTML=`
     <div class="sum"><span class="big">🔗</span><span><b>${escHtml(current.cue)}</b><br>→ Snow Manを1曲再生</span></div>
     <div class="sum"><span class="big">🎧</span><span>${escHtml(current.service)}${current.url?' の決めたページへ':' を開く'}</span></div>
-    <div class="sum"><span class="big">⏰</span><span>${escHtml(current.time)}ごろ／${escHtml(current.date)}から66日間</span></div>
+    <div class="sum"><span class="big">⏰</span><span>${escHtml(current.time)}ごろ／${escHtml(current.date)}開始</span></div>
+    <div class="sum"><span class="big">🌱</span><span>合図は毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間なし → DAY 66確認</span></div>
   `;
   $('#playBtn').classList.toggle('hidden',!current.url);
   $('#result').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 $('#editBtn').onclick=()=>{
-  $('#setup').classList.remove('hidden');
   $('#result').classList.add('hidden');
+  $('#calendarSetup').classList.remove('hidden');
+  $('#setup').classList.remove('hidden');
   window.scrollTo({top:0,behavior:'smooth'});
 };
-$('#playBtn').onclick=()=>current?.url && window.open(current.url,'_blank','noopener');
 
-function compactLocal(date,time){
-  return date.replaceAll('-','')+'T'+time.replace(':','')+'00';
+$('#playBtn').onclick=()=>{
+  if(current?.url) window.open(current.url,'_blank','noopener');
+};
+
+function addDays(iso,n){
+  const [y,m,d]=iso.split('-').map(Number);
+  const x=new Date(y,m-1,d);
+  x.setDate(x.getDate()+n);
+  return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;
 }
-function plusMinutes(date,time,min){
-  const [y,m,d]=date.split('-').map(Number);
+function dtLocal(iso,time){
+  const [y,m,d]=iso.split('-');
+  const [hh,mm]=time.split(':');
+  return `${y}${m}${d}T${hh}${mm}00`;
+}
+function plusMinutes(iso,time,min){
+  const [y,m,d]=iso.split('-').map(Number);
   const [hh,mm]=time.split(':').map(Number);
   const x=new Date(y,m-1,d,hh,mm+min,0);
-  return `${x.getFullYear()}${String(x.getMonth()+1).padStart(2,'0')}${String(x.getDate()).padStart(2,'0')}T${String(x.getHours()).padStart(2,'0')}${String(x.getMinutes()).padStart(2,'0')}00`;
+  const date=`${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;
+  const tm=`${String(x.getHours()).padStart(2,'0')}:${String(x.getMinutes()).padStart(2,'0')}`;
+  return dtLocal(date,tm);
 }
 function icsEsc(s=''){
   return String(s).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');
 }
-function makeICS(){
-  const dt=compactLocal(current.date,current.time);
-  const end=plusMinutes(current.date,current.time,10);
-  const desc=[
-    `${current.cue} → Snow Manを1曲再生。`,
-    `1曲だけでもOK。`,
-    `自然に再生できるようになったら、この定期予定は66日を待たず削除してOK。`,
-    current.url ? `再生ページ：${current.url}` : `${current.service}を開いて再生。`
-  ].join('\n');
+function listenDays(){
+  const set=new Set();
+  for(let d=1;d<=14;d++) set.add(d);
+  for(let d=15;d<=28;d+=2) set.add(d);
+  for(let d=29;d<=45;d+=3) set.add(d);
+  for(let d=46;d<=59;d+=7) set.add(d);
+  return [...set].sort((a,b)=>a-b);
+}
+function makeEvent(day,type){
+  const iso=addDays(current.date,day-1);
+  const start=dtLocal(iso,current.time);
+  const end=plusMinutes(iso,current.time,10);
+
+  let summary, desc, url='';
+  if(type==='final'){
+    summary='66 DAYS｜通知なしでも聴いてた？';
+    desc=[
+      'DAY 66 / 66',
+      'この6日間、66 DAYSからの合図はありませんでした。',
+      'それでもSnow Manを再生した日はありましたか？',
+      'あったなら、生活の中に「聴く場所」ができてきたサインです。'
+    ].join('\n');
+  }else{
+    summary='66 DAYS｜Snow Manを1曲だけ';
+    desc=[
+      `DAY ${day} / 66`,
+      `${current.cue} → Snow Manを1曲再生。`,
+      '1曲だけでもOK。完璧に続けなくて大丈夫。',
+      current.url?`再生ページ：${current.url}`:`${current.service}を開いて再生。`
+    ].join('\n');
+    url=current.url||'';
+  }
 
   return [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//66 DAYS Snow Man//JA',
-    'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
-    'UID:66days-snowman-habit@local',
-    `DTSTART;TZID=Asia/Tokyo:${dt}`,
+    `UID:66days-${day}-${type}@snowman.local`,
+    `DTSTART;TZID=Asia/Tokyo:${start}`,
     `DTEND;TZID=Asia/Tokyo:${end}`,
-    'RRULE:FREQ=DAILY;COUNT=66',
-    'SUMMARY:66 DAYS｜Snow Manを1曲',
+    `SUMMARY:${icsEsc(summary)}`,
     `DESCRIPTION:${icsEsc(desc)}`,
-    current.url?`URL:${current.url}`:'',
+    url?`URL:${url}`:'',
     'BEGIN:VALARM',
     'TRIGGER:PT0M',
     'ACTION:DISPLAY',
-    'DESCRIPTION:Snow Manを1曲だけ。もう自然に再生できるなら、この通知は卒業してOK。',
+    `DESCRIPTION:${icsEsc(summary)}`,
     'END:VALARM',
-    'END:VEVENT',
-    'END:VCALENDAR'
+    'END:VEVENT'
   ].filter(Boolean).join('\r\n');
 }
 
-$('#appleBtn').onclick=()=>{
+function makeICS(){
+  const events=[];
+  listenDays().forEach(day=>events.push(makeEvent(day,'listen')));
+  events.push(makeEvent(66,'final'));
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//66 DAYS Snow Man Habit//JA',
+    'CALSCALE:GREGORIAN',
+    ...events,
+    'END:VCALENDAR'
+  ].join('\r\n');
+}
+
+$('#downloadBtn').onclick=()=>{
   const blob=new Blob([makeICS()],{type:'text/calendar;charset=utf-8'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
-  a.href=url; a.download='66DAYS_SnowMan.ics';
-  document.body.appendChild(a); a.click(); a.remove();
+  a.href=url;
+  a.download='66DAYS_SnowMan.ics';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1500);
-  toast('カレンダー用ファイルを作りました');
+  toast('予定ファイルを作りました');
 };
-
-function googleUrl(){
-  const start=compactLocal(current.date,current.time);
-  const end=plusMinutes(current.date,current.time,10);
-  const details=[
-    `${current.cue} → Snow Manを1曲再生。`,
-    '1曲だけでもOK。',
-    '自然に再生できるようになったら、この定期予定は66日を待たず削除してOK。',
-    current.url ? `再生ページ：${current.url}` : `${current.service}を開いて再生。`
-  ].join('\n');
-  const p=new URLSearchParams({
-    action:'TEMPLATE',
-    text:'66 DAYS｜Snow Manを1曲',
-    dates:`${start}/${end}`,
-    details,
-    ctz:'Asia/Tokyo',
-    recur:'RRULE:FREQ=DAILY;COUNT=66'
-  });
-  return `https://calendar.google.com/calendar/render?${p.toString()}`;
-}
-$('#googleBtn').onclick=()=>window.open(googleUrl(),'_blank','noopener');
 </script>
 </body>
 </html>
