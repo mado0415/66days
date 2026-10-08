@@ -108,6 +108,19 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
   border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;
   padding:11px 13px;font-weight:800;margin-top:9px;width:100%
 }
+.fallbackGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.fallbackBtn{
+  border:1px solid var(--line);border-radius:14px;background:#fff;padding:11px 10px;
+  text-align:left;color:var(--ink);font-size:12px;font-weight:750
+}
+.fallbackBtn.active{background:var(--accent2);border-color:#6fcbe9}
+.optionalBox{
+  margin-top:12px;padding:13px;border-radius:15px;background:#f8fbfc;border:1px solid #e3edf1
+}
+.tipBox{
+  margin-top:12px;padding:13px;border-radius:15px;background:#fffaf0;border:1px solid #f0e4c7;
+  font-size:12px;line-height:1.65;color:#725f37
+}
 .optionList{display:grid;gap:8px;margin-top:12px}
 .option{
   border:1px solid var(--line);background:#fff;color:var(--ink);
@@ -137,19 +150,20 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
     <div class="kicker">66 DAYS</div>
     <h1>毎日ストリーミングを<br>習慣にする</h1>
     <p>毎日ストリーミングしたいけど、なかなか続かない人向けの66日間です。最初に一度だけ、普段の生活の中でSnow Manを聴くタイミングを決めます。</p>
-    <div class="rule">最初は毎日通知。慣れてきたら少しずつ減らして、最後の6日間は通知なしで試します。</div>
+    <div class="rule">通知は最初のきっかけづくりだけ。7日後から少しずつ減らして、最後の6日間は通知なしで試します。</div>
   </section>
 
   <section id="day7Card" class="card hidden">
-    <h2>DAY 7｜このタイミング、続けやすい？</h2>
-    <p class="desc">1週間試してみて、今の生活に合っているか確認してみましょう。合わなければ、ここで変えて大丈夫です。</p>
+    <h2>DAY 7｜通知が来たとき、実際どうだった？</h2>
+    <p class="desc">1週間だけ試したところで、いちばん近いものを選んでください。ここでやり方を調整してOKです。</p>
     <div class="optionList" id="day7Options">
-      <button class="option" data-d7="good"><strong>このまま続けられそう</strong><span>今のタイミングで続けます。</span></button>
-      <button class="option" data-d7="forget"><strong>通知が来ても忘れることが多かった</strong><span>通知の時刻を変えるか、もっと毎日決まってすることに合わせると続けやすいかもしれません。</span></button>
-      <button class="option" data-d7="mismatch"><strong>この時間は聴きにくかった</strong><span>無理に続けず、別の時間や行動に変えてみましょう。</span></button>
+      <button class="option" data-d7="played"><strong>そのまま再生できることが多かった</strong><span>今のタイミングはかなり合っています。</span></button>
+      <button class="option" data-d7="later"><strong>「あとで聴こう」と思って、そのまま忘れた</strong><span>予備のタイミングを決めておくと、「あとで」が消えにくくなります。</span></button>
+      <button class="option" data-d7="busy"><strong>通知が来ても、その時間は聴けないことが多かった</strong><span>通知の時刻か、聴くタイミングそのものを変えた方がよさそうです。</span></button>
+      <button class="option" data-d7="ignored"><strong>通知自体をあまり見ていなかった</strong><span>通知より、普段の行動や目に入る場所をきっかけにした方が合うかもしれません。</span></button>
     </div>
     <div id="day7Result" class="resultBox hidden"></div>
-    <button id="day7EditBtn" class="secondary hidden">タイミングを変える</button>
+    <button id="day7EditBtn" class="secondary hidden">設定を見直す</button>
   </section>
 
   <section id="day66Card" class="card hidden">
@@ -221,6 +235,20 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       </div>
       <label>自分で決める</label>
       <input id="customCue" type="text" placeholder="例：帰宅してバッグを置いたら">
+
+      <div class="optionalBox">
+        <h3>そのとき聴けなかったら？ <span class="small">（おすすめ）</span></h3>
+        <p class="desc">「あとで聴こう」のままだと忘れやすいので、次のタイミングを1つだけ決めておけます。</p>
+        <div class="fallbackGrid" id="fallbackGrid">
+          <button class="fallbackBtn" data-fallback="次にイヤホンをつけたら">🎧 次にイヤホンをつけたら</button>
+          <button class="fallbackBtn" data-fallback="昼休みになったら">🍴 昼休みになったら</button>
+          <button class="fallbackBtn" data-fallback="お風呂に入ったら">🛁 お風呂に入ったら</button>
+          <button class="fallbackBtn" data-fallback="寝る前になったら">🌙 寝る前になったら</button>
+          <button class="fallbackBtn" data-fallback="その日はお休み">☁️ その日はお休み</button>
+        </div>
+        <label>自分で決める</label>
+        <input id="customFallback" type="text" placeholder="例：帰宅して着替えたら">
+      </div>
     </div>
 
     <div class="card">
@@ -235,21 +263,22 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       <label>再生ページのURL <span class="small">（任意）</span></label>
       <input id="playUrl" type="url" inputmode="url" placeholder="https://...">
       <div class="note"><b>1曲だけでもOK。</b>長く聴くことより、決めたタイミングで再生を始めることを優先します。</div>
+      <div class="tipBox"><b>忘れやすい人は、再生先をホーム画面やお気に入りの目につく場所へ。</b><br>通知を見なくても「これを開けばいい」が目に入る状態にしておくと、始めるまでの手間を減らせます。</div>
     </div>
 
     <div class="card">
       <h2>③ 通知の時刻を決める</h2>
-      <p class="desc">選んだ行動をしそうな時刻でOKです。通知は、慣れてくるにつれて少しずつ減っていきます。</p>
+      <p class="desc">通知は、決めたタイミングを思い出すための補助です。最初の7日間だけ毎日、その後は少しずつ減っていきます。</p>
       <label>通知の時刻</label>
       <input id="time" type="time" value="19:00">
       <label>開始日</label>
       <input id="date" type="date">
 
       <div class="plan">
-        <div class="planRow"><div class="planDay">DAY 1–14</div><div class="planText">毎日通知。まずは、決めたタイミングで再生することに慣れます。</div></div>
-        <div class="planRow"><div class="planDay">DAY 15–28</div><div class="planText">2日に1回。通知がない日にも思い出せるか試します。</div></div>
-        <div class="planRow"><div class="planDay">DAY 29–45</div><div class="planText">3日に1回。通知に頼らず再生できる日を増やします。</div></div>
-        <div class="planRow"><div class="planDay">DAY 46–59</div><div class="planText">週1回。通知がなくても自然に再生できているか確認します。</div></div>
+        <div class="planRow"><div class="planDay">DAY 1–7</div><div class="planText">最初の7日間だけ毎日通知。決めたタイミングで再生する感覚をつかみます。</div></div>
+        <div class="planRow"><div class="planDay">DAY 8–21</div><div class="planText">2日に1回。早めに通知がない日を作って、思い出せるか試します。</div></div>
+        <div class="planRow"><div class="planDay">DAY 22–38</div><div class="planText">3日に1回。通知より、普段の行動をきっかけにできる日を増やします。</div></div>
+        <div class="planRow"><div class="planDay">DAY 39–59</div><div class="planText">週1回。通知は確認程度にして、普段の流れで再生できるか見ていきます。</div></div>
         <div class="planRow silent"><div class="planDay">DAY 60–65</div><div class="planText"><b>通知なし。</b>6日間、完全に自分だけで試します。</div></div>
         <div class="planRow last"><div class="planDay">DAY 66</div><div class="planText">最後に「通知がなくても聴けた？」を確認します。</div></div>
       </div>
@@ -310,6 +339,7 @@ const $$=s=>[...document.querySelectorAll(s)];
 
 let platform='iphone';
 let cue='';
+let fallback='';
 let service='Apple Music';
 let current=null;
 
@@ -375,6 +405,17 @@ $('#customCue').oninput=()=>{
     $$('.choice').forEach(x=>x.classList.remove('active'));
   }
 };
+$$('.fallbackBtn').forEach(b=>b.onclick=()=>{
+  fallback=b.dataset.fallback;
+  $('#customFallback').value='';
+  $$('.fallbackBtn').forEach(x=>x.classList.toggle('active',x===b));
+});
+$('#customFallback').oninput=()=>{
+  if($('#customFallback').value.trim()){
+    fallback=$('#customFallback').value.trim();
+    $$('.fallbackBtn').forEach(x=>x.classList.remove('active'));
+  }
+};
 $$('.service').forEach(b=>b.onclick=()=>{
   service=b.dataset.service;
   $$('.service').forEach(x=>x.classList.toggle('active',x===b));
@@ -386,6 +427,7 @@ function build(){
   return {
     platform,
     cue:c,
+    fallback:($('#customFallback').value.trim()||fallback).trim(),
     service,
     url:$('#playUrl').value.trim(),
     date:$('#date').value||isoToday(),
@@ -409,10 +451,10 @@ function renderResult(){
   $('#androidImport').classList.toggle('hidden',current.platform!=='android');
 
   $('#summary').innerHTML=`
-    <div class="sum"><span class="big">🔗</span><span><b>${escHtml(current.cue)}</b><br>→ Snow Manを1曲再生</span></div>
+    <div class="sum"><span class="big">🔗</span><span><b>${escHtml(current.cue)}</b><br>→ Snow Manを1曲再生${current.fallback?`<br><span class="small">無理だったら：${escHtml(current.fallback)}</span>`:''}</span></div>
     <div class="sum"><span class="big">🎧</span><span>${escHtml(current.service)}${current.url?'：登録した再生ページ':'を使う'}</span></div>
     <div class="sum"><span class="big">⏰</span><span>${escHtml(current.time)}ごろ／${escHtml(current.date)}開始</span></div>
-    <div class="sum"><span class="big">🌱</span><span>毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間通知なし → DAY 66に振り返り</span></div>
+    <div class="sum"><span class="big">🌱</span><span>7日間は毎日 → 2日に1回 → 3日に1回 → 週1回 → 6日間通知なし → DAY 66に振り返り</span></div>
   `;
   $('#playBtn').classList.toggle('hidden',!current.url);
   $('#result').scrollIntoView({behavior:'smooth',block:'start'});
@@ -426,6 +468,7 @@ function restoreFormFromCurrent(){
   $('#androidBox').classList.toggle('hidden',platform!=='android');
 
   cue=current.cue||'';
+  fallback=current.fallback||'';
   const preset=$$('.choice').find(x=>x.dataset.cue===cue);
   if(preset){
     $$('.choice').forEach(x=>x.classList.toggle('active',x===preset));
@@ -433,6 +476,15 @@ function restoreFormFromCurrent(){
   }else{
     $$('.choice').forEach(x=>x.classList.remove('active'));
     $('#customCue').value=cue;
+  }
+
+  const fallbackPreset=$$('.fallbackBtn').find(x=>x.dataset.fallback===fallback);
+  if(fallbackPreset){
+    $$('.fallbackBtn').forEach(x=>x.classList.toggle('active',x===fallbackPreset));
+    $('#customFallback').value='';
+  }else{
+    $$('.fallbackBtn').forEach(x=>x.classList.remove('active'));
+    $('#customFallback').value=fallback;
   }
 
   service=current.service||'Apple Music';
@@ -468,14 +520,21 @@ $$('[data-d7]').forEach(btn=>{
     const v=btn.dataset.d7;
     $$('[data-d7]').forEach(x=>x.classList.toggle('active',x===btn));
     $('#day7Result').classList.remove('hidden');
-    if(v==='good'){
-      $('#day7Result').innerHTML='<strong>今の設定で続けてみましょう。</strong><br>次からは通知が少しずつ減っていきます。';
+
+    if(v==='played'){
+      $('#day7Result').innerHTML='<strong>今のタイミングはかなり合っています。</strong><br>ここから通知を少しずつ減らして、通知がない日にも同じ流れで再生できるか試してみましょう。';
       $('#day7EditBtn').classList.add('hidden');
-    }else if(v==='forget'){
-      $('#day7Result').innerHTML='<strong>今の通知が、生活の流れに合っていないのかもしれません。</strong><br>通知の時刻を変えるか、「歯みがきのあと」「通勤を始めたとき」など、毎日ほぼ必ずある行動に合わせてみてください。';
+    }else if(v==='later'){
+      const backup=current?.fallback
+        ? `今決めている予備タイミングは「${escHtml(current.fallback)}」です。`
+        : '「そのとき無理だったら○○したら聴く」という予備タイミングを1つ決めてみるのがおすすめです。';
+      $('#day7Result').innerHTML=`<strong>「あとで」を、具体的な次の行動に変えてみましょう。</strong><br>${backup}<br>通知を見た瞬間に再生できなくても大丈夫です。`;
+      $('#day7EditBtn').classList.remove('hidden');
+    }else if(v==='busy'){
+      $('#day7Result').innerHTML='<strong>その時間が生活に合っていないのかもしれません。</strong><br>通知の時刻を動かすか、通勤・お風呂・寝る前など、実際に音楽を流しやすいタイミングへ変えてみましょう。';
       $('#day7EditBtn').classList.remove('hidden');
     }else{
-      $('#day7Result').innerHTML='<strong>タイミングを変えてみましょう。</strong><br>聴きにくい時間に無理に合わせる必要はありません。普段の生活で自然に音楽を流せる時間を選び直してみてください。';
+      $('#day7Result').innerHTML='<strong>通知をきっかけにする方法が合っていないのかもしれません。</strong><br>再生先をホーム画面の目につく場所に置いたり、「通勤を始めたら」のような普段の行動をきっかけにする方を優先してみてください。';
       $('#day7EditBtn').classList.remove('hidden');
     }
   };
@@ -523,21 +582,21 @@ function icsEsc(s=''){
 }
 function listenDays(){
   const set=new Set();
-  for(let d=1;d<=14;d++) set.add(d);
-  for(let d=15;d<=28;d+=2) set.add(d);
-  for(let d=29;d<=45;d+=3) set.add(d);
-  for(let d=46;d<=59;d+=7) set.add(d);
+  for(let d=1;d<=7;d++) set.add(d);
+  for(let d=8;d<=21;d+=2) set.add(d);
+  for(let d=22;d<=38;d+=3) set.add(d);
+  for(let d=39;d<=59;d+=7) set.add(d);
   return [...set].sort((a,b)=>a-b);
 }
 function phaseMessage(day){
-  if(day<=14){
-    return 'Snow Manを1曲だけ。いつものタイミングで再生してみよう。';
+  if(day<=7){
+    return 'Snow Manを1曲だけ。今むずかしければ、予備のタイミングでOK。';
   }
-  if(day<=28){
-    return '今日は通知の日。Snow Manを1曲だけ再生してみよう。';
+  if(day<=21){
+    return '今日は通知の日。通知がない日にも思い出せたら順調です。';
   }
-  if(day<=45){
-    return '今日は通知あり。通知がない日にも思い出せたら順調です。';
+  if(day<=38){
+    return '通知は少なめ。普段の流れだけで再生できる日が増えてきたか見てみよう。';
   }
   return '久しぶりの通知です。最近、通知がない日にも聴けていますか？';
 }
@@ -548,11 +607,11 @@ function makeEvent(day,type){
 
   let summary, desc, url='';
   if(type==='day7'){
-    summary='66 DAYS｜1週間やってみてどう？';
+    summary='66 DAYS｜通知が来たとき、どうだった？';
     desc=[
       'DAY 7 / 66',
-      '今のタイミングが続けやすいか、1分だけ確認してみましょう。',
-      '合わなければ、設定を変えてOKです。',
+      '通知が来たとき、そのまま再生できたか、「あとで」で忘れたかを1分だけ確認してみましょう。',
+      'うまくいかなければ、時刻や予備タイミングを変えてOKです。',
       `確認ページ：${checkinUrl(7)}`
     ].join('\n');
     url=checkinUrl(7);
@@ -571,9 +630,10 @@ function makeEvent(day,type){
       `DAY ${day} / 66`,
       phaseMessage(day),
       `${current.cue}、Snow Manを1曲再生。`,
+      current.fallback ? `今むずかしければ：${current.fallback}` : '',
       '1曲だけでもOK。毎日完璧に続けなくて大丈夫です。',
       current.url?`再生ページ：${current.url}`:`${current.service}を開いて再生。`
-    ].join('\n');
+    ].filter(Boolean).join('\n');
     url=current.url||'';
   }
 
