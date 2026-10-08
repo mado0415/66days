@@ -121,6 +121,26 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
   margin-top:12px;padding:13px;border-radius:15px;background:#fffaf0;border:1px solid #f0e4c7;
   font-size:12px;line-height:1.65;color:#725f37
 }
+.tipsWrap{
+  margin-top:12px;border:1px solid #e2edf1;border-radius:16px;background:#fbfdfe;overflow:hidden
+}
+.tipsWrap summary{
+  list-style:none;cursor:pointer;padding:14px 15px;font-size:13px;font-weight:900;color:var(--ink)
+}
+.tipsWrap summary::-webkit-details-marker{display:none}
+.tipsWrap summary::after{content:"＋";float:right;color:#6d8995;font-size:17px;line-height:1}
+.tipsWrap[open] summary::after{content:"−"}
+.tipsBody{padding:0 14px 14px}
+.tipsLead{font-size:11px;color:var(--sub);line-height:1.65;margin:0 0 10px}
+.tipItem{
+  padding:12px 0;border-top:1px solid #e7eef1;font-size:12px;line-height:1.65;color:#526f7a
+}
+.tipItem:first-of-type{border-top:0}
+.tipItem b{display:block;color:var(--ink);font-size:12.5px;margin-bottom:3px}
+.tipExample{
+  display:block;margin-top:6px;padding:8px 10px;border-radius:10px;background:#f3f8fa;color:#456572
+}
+
 .optionList{display:grid;gap:8px;margin-top:12px}
 .option{
   border:1px solid var(--line);background:#fff;color:var(--ink);
@@ -159,11 +179,12 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
     <div class="optionList" id="day7Options">
       <button class="option" data-d7="played"><strong>そのまま再生できることが多かった</strong><span>今のタイミングはかなり合っています。</span></button>
       <button class="option" data-d7="later"><strong>「あとで聴こう」と思って、そのまま忘れた</strong><span>予備のタイミングを決めておくと、「あとで」が消えにくくなります。</span></button>
+      <button class="option" data-d7="stuck"><strong>聴こうとは思うけど、なぜか再生するまでが長かった</strong><span>考えている間に先延ばしになっているなら、最初の1動作だけ先にやる方法を試してみても。</span></button>
       <button class="option" data-d7="busy"><strong>通知が来ても、その時間は聴けないことが多かった</strong><span>通知の時刻か、聴くタイミングそのものを変えた方がよさそうです。</span></button>
       <button class="option" data-d7="ignored"><strong>通知自体をあまり見ていなかった</strong><span>通知より、普段の行動や目に入る場所をきっかけにした方が合うかもしれません。</span></button>
     </div>
     <div id="day7Result" class="resultBox hidden"></div>
-    <button id="day7EditBtn" class="secondary hidden">設定を見直す</button>
+    <button id="day7EditBtn" class="secondary hidden">設定やTIPSを見直す</button>
   </section>
 
   <section id="day66Card" class="card hidden">
@@ -264,6 +285,45 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       <input id="playUrl" type="url" inputmode="url" placeholder="https://...">
       <div class="note"><b>1曲だけでもOK。</b>長く聴くことより、決めたタイミングで再生を始めることを優先します。</div>
       <div class="tipBox"><b>忘れやすい人は、再生先をホーム画面やお気に入りの目につく場所へ。</b><br>通知を見なくても「これを開けばいい」が目に入る状態にしておくと、始めるまでの手間を減らせます。</div>
+
+      <details class="tipsWrap" id="procrastinationTips">
+        <summary>TIPS｜「あとで聴こう」で先延ばししがちな人へ</summary>
+        <div class="tipsBody">
+          <p class="tipsLead">全部やる必要はありません。「これならできそう」と思うものを1つだけ試すくらいでOKです。</p>
+
+          <div class="tipItem">
+            <b>① 考え始める前に、最初の1動作だけやる</b>
+            「今聴く？あとにする？」と考え始める前に、まずアプリを開くところだけ済ませます。再生まで一気にやらなくてもOK。
+            <span class="tipExample">例：「あーー」と言いながらSpotifyを開く／「はい再生」でプレイリストをタップ</span>
+          </div>
+
+          <div class="tipItem">
+            <b>② 「あとで」を、具体的な行動に置き換える</b>
+            「あとで聴く」ではなく、「お風呂に入ったら」「イヤホンをつけたら」のように、次に起こる行動まで決めておきます。
+            <span class="tipExample">「今は無理」→「帰宅して着替えたら1曲」</span>
+          </div>
+
+          <div class="tipItem">
+            <b>③ 毎回選ばない</b>
+            何を聴くか考えるところで止まりやすい人は、「迷ったらこれ」を1つ決めておきます。いつものプレイリストやアルバムでOK。
+          </div>
+
+          <div class="tipItem">
+            <b>④ 始めるまでの手間を減らす</b>
+            再生先をホーム画面・お気に入り・ウィジェットなど、すぐ開ける場所に置いておきます。「探す」をなくすだけでも始めやすくなります。
+          </div>
+
+          <div class="tipItem">
+            <b>⑤ 「1曲だけ」で終わってもOKにする</b>
+            最初から長時間聴こうとすると後回しにしやすくなります。1曲再生できたらその日はOK。続けたくなったらそのまま聴けば十分です。
+          </div>
+
+          <div class="tipItem">
+            <b>⑥ できなかった日を取り返そうとしない</b>
+            昨日できなかった分を今日がんばる必要はありません。次のタイミングで、また1曲から再開します。
+          </div>
+        </div>
+      </details>
     </div>
 
     <div class="card">
@@ -529,6 +589,9 @@ $$('[data-d7]').forEach(btn=>{
         ? `今決めている予備タイミングは「${escHtml(current.fallback)}」です。`
         : '「そのとき無理だったら○○したら聴く」という予備タイミングを1つ決めてみるのがおすすめです。';
       $('#day7Result').innerHTML=`<strong>「あとで」を、具体的な次の行動に変えてみましょう。</strong><br>${backup}<br>通知を見た瞬間に再生できなくても大丈夫です。`;
+      $('#day7EditBtn').classList.remove('hidden');
+    }else if(v==='stuck'){
+      $('#day7Result').innerHTML='<strong>考えている間に、始めるタイミングを逃しているのかもしれません。</strong><br>次の1週間だけ「再生しなきゃ」ではなく、まず音楽アプリを開くところまでを先にやってみるのも手です。設定画面の「先延ばししがちな人向けTIPS」も、使えそうなものだけ試してみてください。';
       $('#day7EditBtn').classList.remove('hidden');
     }else if(v==='busy'){
       $('#day7Result').innerHTML='<strong>その時間が生活に合っていないのかもしれません。</strong><br>通知の時刻を動かすか、通勤・お風呂・寝る前など、実際に音楽を流しやすいタイミングへ変えてみましょう。';
