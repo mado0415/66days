@@ -332,8 +332,8 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       <input id="playUrl" type="url" inputmode="url" placeholder="https://...">
 
       <div class="autoMusicBox">
-        <button type="button" id="latestTrackBtn" class="autoMusicBtn">Snow Manの最新リリースを自動で設定</button>
-        <p id="latestTrackStatus" class="autoMusicStatus">選んだ音楽サービスに合わせて、再生先を自動で入れます。</p>
+        <button type="button" id="latestTrackBtn" class="autoMusicBtn">最新リリースを自動で設定</button>
+        <p id="latestTrackStatus" class="autoMusicStatus">選んだ音楽サービスに合わせて、再生先を自動で入れます。<br>※最新の配信リリースを取得します。最新の表題曲とは限りません。</p>
       </div>
       <div class="note"><b>1曲だけでもOK。</b>長く聴くことより、決めたタイミングで再生を始めることを優先します。</div>
       <div class="tipBox"><b>忘れやすい人は、再生先をホーム画面やお気に入りの目につく場所へ。</b><br>通知を見なくても「これを開けばいい」が目に入る状態にしておくと、始めるまでの手間を減らせます。</div>
@@ -531,7 +531,7 @@ $('#customFallback').oninput=()=>{
 $$('.service').forEach(b=>b.addEventListener('click',()=>{
   service=b.dataset.service;
   $$('.service').forEach(x=>x.classList.toggle('active',x===b));
-  $('#latestTrackStatus').textContent='選んだ音楽サービスに合わせて、再生先を自動で入れます。';
+  $('#latestTrackStatus').innerHTML='選んだ音楽サービスに合わせて、再生先を自動で入れます。<br>※最新の配信リリースを取得します。最新の表題曲とは限りません。';
 }));
 
 
@@ -634,9 +634,9 @@ $('#latestTrackBtn').addEventListener('click',async()=>{
   if(target) $('#playUrl').value=target;
 
   if(service==='Apple Music'){
-    status.textContent=`「${track.trackName}」を設定しました。`;
+    status.textContent=`「${track.trackName}」を設定しました。URLのコピーは不要です。`;
   }else{
-    status.textContent=`「${track.trackName}」の${service}検索ページを設定しました。`;
+    status.textContent=`「${track.trackName}」の${service}検索ページを設定しました。URLのコピーは不要です。`;
   }
 });
 
