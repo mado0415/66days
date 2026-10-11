@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5fbfd">
-<title>66 DAYS｜毎日ストリーミングを習慣にする</title>
+<title>66 DAYS｜毎日ストリーミング習慣化計画</title>
 <style>
 :root{
   --bg:#f5fafc;--card:#fff;--ink:#18323e;--sub:#6d8590;
@@ -32,6 +32,19 @@ h3{font-size:15px;margin:0 0 7px}
 p{line-height:1.7}
 .hero p,.desc,.small{font-size:12px;color:var(--sub);margin:0}
 .rule{margin-top:15px;padding:12px 13px;border-radius:14px;background:#fff;border:1px solid #deedf2;font-size:13px;font-weight:800;line-height:1.6}
+.researchNote{
+  margin-top:10px;border-top:1px solid #e5eef2;padding-top:10px
+}
+.researchNote summary{
+  cursor:pointer;font-size:11px;font-weight:800;color:#6b8792
+}
+.researchNoteBody{
+  padding-top:8px;font-size:11px;line-height:1.7;color:#718792
+}
+.researchNoteBody a{
+  color:#4b8196;text-decoration:underline
+}
+
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
 .tab{
   border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 8px;
@@ -53,10 +66,19 @@ p{line-height:1.7}
 .checkrow label{margin:0;font-size:13px;font-weight:800;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
 .choice{
-  border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 10px;
-  text-align:left;color:var(--ink);font-weight:750
+  position:relative;
+  border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 34px 12px 10px;
+  text-align:left;color:var(--ink);font-weight:750;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation;
 }
-.choice.active{background:var(--accent2);border-color:#6fcbe9;box-shadow:inset 0 0 0 1px #6fcbe9}
+.choice.active{
+  background:var(--accent2);border-color:#6fcbe9;box-shadow:inset 0 0 0 1px #6fcbe9
+}
+.choice.active::after{
+  content:"✓";position:absolute;right:11px;top:50%;transform:translateY(-50%);
+  width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#5dbbdc;color:#fff;font-size:12px;font-weight:900
+}
 .serviceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .service{
   border:1px solid var(--line);border-radius:14px;background:#fff;padding:11px 6px;
@@ -110,10 +132,17 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 }
 .fallbackGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
 .fallbackBtn{
-  border:1px solid var(--line);border-radius:14px;background:#fff;padding:11px 10px;
-  text-align:left;color:var(--ink);font-size:12px;font-weight:750
+  position:relative;
+  border:1px solid var(--line);border-radius:14px;background:#fff;padding:11px 34px 11px 10px;
+  text-align:left;color:var(--ink);font-size:12px;font-weight:750;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation;
 }
 .fallbackBtn.active{background:var(--accent2);border-color:#6fcbe9}
+.fallbackBtn.active::after{
+  content:"✓";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#5dbbdc;color:#fff;font-size:11px;font-weight:900
+}
 .optionalBox{
   margin-top:12px;padding:13px;border-radius:15px;background:#f8fbfc;border:1px solid #e3edf1
 }
@@ -121,6 +150,17 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
   margin-top:12px;padding:13px;border-radius:15px;background:#fffaf0;border:1px solid #f0e4c7;
   font-size:12px;line-height:1.65;color:#725f37
 }
+.autoMusicBox{
+  margin-top:12px;padding:13px;border-radius:15px;background:#f6fbfd;border:1px solid #dfedf2
+}
+.autoMusicBtn{
+  width:100%;border:1px solid #bddfea;background:#fff;color:var(--ink);
+  border-radius:13px;padding:12px 11px;font-weight:850;font-size:12px;
+  -webkit-appearance:none;appearance:none;touch-action:manipulation
+}
+.autoMusicBtn:disabled{opacity:.55}
+.autoMusicStatus{margin:7px 1px 0;font-size:11px;line-height:1.55;color:var(--sub)}
+
 .tipsWrap{
   margin-top:12px;border:1px solid #e2edf1;border-radius:16px;background:#fbfdfe;overflow:hidden
 }
@@ -168,35 +208,42 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 <div class="wrap">
   <section class="hero">
     <div class="kicker">66 DAYS</div>
-    <h1>毎日ストリーミングを<br>習慣にする</h1>
+    <h1>毎日ストリーミング<br>習慣化計画</h1>
     <p>毎日ストリーミングしたいけど、なかなか続かない人向けの66日間です。最初に一度だけ、普段の生活の中でSnow Manを聴くタイミングを決めます。</p>
     <div class="rule"><strong>目標は「通知が来たら聴く」ことではありません。</strong><br>通勤・お風呂・寝る前など、いつもの行動そのものをきっかけに再生できるようになることを目指します。通知は最初だけ、その習慣づくりを手伝います。</div>
+    <details class="researchNote">
+      <summary>なぜ66日？</summary>
+      <div class="researchNoteBody">
+        日常の行動が習慣になっていく過程を調べた研究で、行動がかなり自動化するまでの期間の中央値が66日だったことに由来しています。ただし、実際には18〜254日と大きな個人差があり、<strong>「66日続ければ必ず習慣になる」という意味ではありません。</strong>この企画では、66日をひとつの目安として使っています。<br>
+        参考：Lally et al. (2010), <a href="https://doi.org/10.1002/ejsp.674" target="_blank" rel="noopener">How are habits formed?</a>
+      </div>
+    </details>
   </section>
 
   <section id="day7Card" class="card hidden">
     <h2>DAY 7｜通知が来たとき、実際どうだった？</h2>
     <p class="desc">1週間だけ試したところで、いちばん近いものを選んでください。ここでやり方を調整してOKです。</p>
     <div class="optionList" id="day7Options">
-      <button class="option" data-d7="played"><strong>そのまま再生できることが多かった</strong><span>今のタイミングはかなり合っています。</span></button>
-      <button class="option" data-d7="later"><strong>「あとで聴こう」と思って、そのまま忘れた</strong><span>予備のタイミングを決めておくと、「あとで」が消えにくくなります。</span></button>
-      <button class="option" data-d7="stuck"><strong>聴こうとは思うけど、なぜか再生するまでが長かった</strong><span>考えている間に先延ばしになっているなら、最初の1動作だけ先にやる方法を試してみても。</span></button>
-      <button class="option" data-d7="busy"><strong>通知が来ても、その時間は聴けないことが多かった</strong><span>通知の時刻か、聴くタイミングそのものを変えた方がよさそうです。</span></button>
-      <button class="option" data-d7="ignored"><strong>通知自体をあまり見ていなかった</strong><span>通知より、普段の行動や目に入る場所をきっかけにした方が合うかもしれません。</span></button>
+      <button type="button" class="option" data-d7="played"><strong>そのまま再生できることが多かった</strong><span>今のタイミングはかなり合っています。</span></button>
+      <button type="button" class="option" data-d7="later"><strong>「あとで聴こう」と思って、そのまま忘れた</strong><span>予備のタイミングを決めておくと、「あとで」が消えにくくなります。</span></button>
+      <button type="button" class="option" data-d7="stuck"><strong>聴こうとは思うけど、なぜか再生するまでが長かった</strong><span>考えている間に先延ばしになっているなら、最初の1動作だけ先にやる方法を試してみても。</span></button>
+      <button type="button" class="option" data-d7="busy"><strong>通知が来ても、その時間は聴けないことが多かった</strong><span>通知の時刻か、聴くタイミングそのものを変えた方がよさそうです。</span></button>
+      <button type="button" class="option" data-d7="ignored"><strong>通知自体をあまり見ていなかった</strong><span>通知より、普段の行動や目に入る場所をきっかけにした方が合うかもしれません。</span></button>
     </div>
     <div id="day7Result" class="resultBox hidden"></div>
-    <button id="day7EditBtn" class="secondary hidden">設定やTIPSを見直す</button>
+    <button type="button" id="day7EditBtn" class="secondary hidden">設定やTIPSを見直す</button>
   </section>
 
   <section id="day66Card" class="card hidden">
     <h2>DAY 66｜通知がなくても聴けた？</h2>
     <p class="desc">最後の6日間は通知を送りませんでした。いつもの生活の中で、Snow Manを聴くことを思い出せたか振り返ってみましょう。</p>
     <div class="optionList" id="day66Options">
-      <button class="option" data-d66="auto"><strong>何度か自然に再生していた</strong><span>通知がなくても、いつもの流れで再生できた日があった。</span></button>
-      <button class="option" data-d66="aware"><strong>思い出したけれど、聴かない日もあった</strong><span>「聴こう」と思い出すことはできた。</span></button>
-      <button class="option" data-d66="rare"><strong>ほとんど思い出さなかった</strong><span>今のタイミングでは習慣になりにくかったかもしれない。</span></button>
+      <button type="button" class="option" data-d66="auto"><strong>何度か自然に再生していた</strong><span>通知がなくても、いつもの流れで再生できた日があった。</span></button>
+      <button type="button" class="option" data-d66="aware"><strong>思い出したけれど、聴かない日もあった</strong><span>「聴こう」と思い出すことはできた。</span></button>
+      <button type="button" class="option" data-d66="rare"><strong>ほとんど思い出さなかった</strong><span>今のタイミングでは習慣になりにくかったかもしれない。</span></button>
     </div>
     <div id="day66Result" class="resultBox hidden"></div>
-    <button id="restartBtn" class="secondary hidden">別のタイミングで試してみる</button>
+    <button type="button" id="restartBtn" class="secondary hidden">別のタイミングで試してみる</button>
   </section>
 
   <section id="calendarSetup" class="card">
@@ -204,8 +251,8 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
     <p class="desc">あとで設定を変えたくなったとき、予定を1件ずつ消さずにまとめて削除できるよう、専用カレンダーを作ります。</p>
 
     <div class="tabs">
-      <button class="tab active" data-platform="iphone">iPhone / iPad</button>
-      <button class="tab" data-platform="android">Android</button>
+      <button type="button" class="tab active" data-platform="iphone">iPhone / iPad</button>
+      <button type="button" class="tab" data-platform="android">Android</button>
     </div>
 
     <div id="iphoneBox" class="platformBox">
@@ -245,14 +292,14 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       <h2>① いつ聴く？</h2>
       <p class="desc">普段からしていることとセットにすると、思い出しやすくなります。</p>
       <div class="grid" id="cueGrid">
-        <button class="choice" data-cue="朝の支度を始めたら">☀️ 朝の支度</button>
-        <button class="choice" data-cue="通勤・通学を始めたら">🚃 通勤・通学</button>
-        <button class="choice" data-cue="メイクを始めたら">🪞 メイク</button>
-        <button class="choice" data-cue="家事を始めたら">🧺 家事</button>
-        <button class="choice" data-cue="夕飯を作り始めたら">🍳 夕飯づくり</button>
-        <button class="choice" data-cue="お風呂に入ったら">🛁 お風呂</button>
-        <button class="choice" data-cue="スキンケアを始めたら">🫧 スキンケア</button>
-        <button class="choice" data-cue="車に乗ったら">🚗 車に乗る</button>
+        <button type="button" class="choice" data-cue="朝の支度を始めたら">☀️ 朝の支度</button>
+        <button type="button" class="choice" data-cue="通勤・通学を始めたら">🚃 通勤・通学</button>
+        <button type="button" class="choice" data-cue="メイクを始めたら">🪞 メイク</button>
+        <button type="button" class="choice" data-cue="家事を始めたら">🧺 家事</button>
+        <button type="button" class="choice" data-cue="夕飯を作り始めたら">🍳 夕飯づくり</button>
+        <button type="button" class="choice" data-cue="お風呂に入ったら">🛁 お風呂</button>
+        <button type="button" class="choice" data-cue="スキンケアを始めたら">🫧 スキンケア</button>
+        <button type="button" class="choice" data-cue="車に乗ったら">🚗 車に乗る</button>
       </div>
       <label>自分で決める</label>
       <input id="customCue" type="text" placeholder="例：帰宅してバッグを置いたら">
@@ -261,11 +308,11 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
         <h3>そのとき聴けなかったら？ <span class="small">（おすすめ）</span></h3>
         <p class="desc">「あとで聴こう」のままだと忘れやすいので、次のタイミングを1つだけ決めておけます。</p>
         <div class="fallbackGrid" id="fallbackGrid">
-          <button class="fallbackBtn" data-fallback="次にイヤホンをつけたら">🎧 次にイヤホンをつけたら</button>
-          <button class="fallbackBtn" data-fallback="昼休みになったら">🍴 昼休みになったら</button>
-          <button class="fallbackBtn" data-fallback="お風呂に入ったら">🛁 お風呂に入ったら</button>
-          <button class="fallbackBtn" data-fallback="寝る前になったら">🌙 寝る前になったら</button>
-          <button class="fallbackBtn" data-fallback="その日はお休み">☁️ その日はお休み</button>
+          <button type="button" class="fallbackBtn" data-fallback="次にイヤホンをつけたら">🎧 次にイヤホンをつけたら</button>
+          <button type="button" class="fallbackBtn" data-fallback="昼休みになったら">🍴 昼休みになったら</button>
+          <button type="button" class="fallbackBtn" data-fallback="お風呂に入ったら">🛁 お風呂に入ったら</button>
+          <button type="button" class="fallbackBtn" data-fallback="寝る前になったら">🌙 寝る前になったら</button>
+          <button type="button" class="fallbackBtn" data-fallback="その日はお休み">☁️ その日はお休み</button>
         </div>
         <label>自分で決める</label>
         <input id="customFallback" type="text" placeholder="例：帰宅して着替えたら">
@@ -276,13 +323,18 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       <h2>② 何を聴く？</h2>
       <p class="desc">毎回「何を聴こう？」と迷わなくていいように、すぐ開ける再生先を1つ決めます。</p>
       <div class="serviceGrid" id="serviceGrid" style="margin-top:12px">
-        <button class="service active" data-service="Apple Music">Apple Music</button>
-        <button class="service" data-service="Spotify">Spotify</button>
-        <button class="service" data-service="YouTube Music">YouTube Music</button>
-        <button class="service" data-service="その他">その他</button>
+        <button type="button" class="service active" data-service="Apple Music">Apple Music</button>
+        <button type="button" class="service" data-service="Spotify">Spotify</button>
+        <button type="button" class="service" data-service="YouTube Music">YouTube Music</button>
+        <button type="button" class="service" data-service="その他">その他</button>
       </div>
       <label>再生ページのURL <span class="small">（任意）</span></label>
       <input id="playUrl" type="url" inputmode="url" placeholder="https://...">
+
+      <div class="autoMusicBox">
+        <button type="button" id="latestTrackBtn" class="autoMusicBtn">Snow Manの最新リリースを自動で設定</button>
+        <p id="latestTrackStatus" class="autoMusicStatus">選んだ音楽サービスに合わせて、再生先を自動で入れます。</p>
+      </div>
       <div class="note"><b>1曲だけでもOK。</b>長く聴くことより、決めたタイミングで再生を始めることを優先します。</div>
       <div class="tipBox"><b>忘れやすい人は、再生先をホーム画面やお気に入りの目につく場所へ。</b><br>通知を見なくても「これを開けばいい」が目に入る状態にしておくと、始めるまでの手間を減らせます。</div>
 
@@ -343,7 +395,7 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
         <div class="planRow last"><div class="planDay">DAY 66</div><div class="planText">最後に「通知がなくても聴けた？」を確認します。</div></div>
       </div>
 
-      <button id="createBtn" class="primary" disabled>私の66 DAYSを作る</button>
+      <button type="button" id="createBtn" class="primary" disabled>66 DAYSをはじめる</button>
       <p id="disabledHint" class="details">↑ 先に「66 DAYS」専用カレンダーを作って、上のチェックを入れてください。</p>
     </div>
   </section>
@@ -354,11 +406,11 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
 
     <div id="summary" class="summary"></div>
 
-    <button id="downloadBtn" class="download">📅 66 DAYSの予定をカレンダーに追加する</button>
-    <button id="playBtn" class="play hidden">▶︎ 今、1曲だけ聴いてみる</button>
+    <button type="button" id="downloadBtn" class="download">📅 66 DAYSの予定をカレンダーに追加する</button>
+    <button type="button" id="playBtn" class="play hidden">▶︎ 今、1曲だけ聴いてみる</button>
 
     <div class="warning">
-      <b>大事：予定を追加するとき</b><br>
+      <b>注意：予定を追加するとき</b><br>
       保存先のカレンダーを選ぶ画面が出たら、必ずさっき作った <b>「66 DAYS」</b> を選んでください。
     </div>
 
@@ -386,7 +438,7 @@ input:focus{border-color:#72cce9;box-shadow:0 0 0 3px rgba(114,204,233,.14)}
       最初の1回をその場で済ませておくと、「このタイミングで聴く」を始めやすくなります。
     </div>
 
-    <button id="editBtn" class="secondary">設定を変える</button>
+    <button type="button" id="editBtn" class="secondary">設定を変える</button>
   </section>
 </div>
 
@@ -454,31 +506,138 @@ $('#calendarDone').onchange=()=>{
   $('#disabledHint').classList.toggle('hidden',ok);
 };
 
-$$('.choice').forEach(b=>b.onclick=()=>{
+$$('.choice').forEach(b=>b.addEventListener('click',()=>{
   cue=b.dataset.cue;
   $('#customCue').value='';
   $$('.choice').forEach(x=>x.classList.toggle('active',x===b));
-});
+}));
 $('#customCue').oninput=()=>{
   if($('#customCue').value.trim()){
     cue=$('#customCue').value.trim();
     $$('.choice').forEach(x=>x.classList.remove('active'));
   }
 };
-$$('.fallbackBtn').forEach(b=>b.onclick=()=>{
+$$('.fallbackBtn').forEach(b=>b.addEventListener('click',()=>{
   fallback=b.dataset.fallback;
   $('#customFallback').value='';
   $$('.fallbackBtn').forEach(x=>x.classList.toggle('active',x===b));
-});
+}));
 $('#customFallback').oninput=()=>{
   if($('#customFallback').value.trim()){
     fallback=$('#customFallback').value.trim();
     $$('.fallbackBtn').forEach(x=>x.classList.remove('active'));
   }
 };
-$$('.service').forEach(b=>b.onclick=()=>{
+$$('.service').forEach(b=>b.addEventListener('click',()=>{
   service=b.dataset.service;
   $$('.service').forEach(x=>x.classList.toggle('active',x===b));
+  $('#latestTrackStatus').textContent='選んだ音楽サービスに合わせて、再生先を自動で入れます。';
+}));
+
+
+const SNOW_MAN_APPLE_ARTIST_ID='1772019148';
+
+function latestUrlForService(track){
+  const title=`Snow Man ${track.trackName}`;
+  if(service==='Apple Music'){
+    return track.trackViewUrl || track.collectionViewUrl || '';
+  }
+  if(service==='Spotify'){
+    return `https://open.spotify.com/search/${encodeURIComponent(title)}`;
+  }
+  if(service==='YouTube Music'){
+    return `https://music.youtube.com/search?q=${encodeURIComponent(title)}`;
+  }
+  return track.trackViewUrl || track.collectionViewUrl || '';
+}
+
+function chooseLatestSnowManTrack(data){
+  const results=(data && Array.isArray(data.results)) ? data.results : [];
+  const songs=results.filter(x =>
+    x &&
+    (x.kind==='song' || x.wrapperType==='track') &&
+    String(x.artistName||'').toLowerCase()==='snow man'
+  );
+  if(!songs.length) return null;
+
+  songs.sort((a,b)=>{
+    const da=Date.parse(a.releaseDate||0)||0;
+    const db=Date.parse(b.releaseDate||0)||0;
+    return db-da;
+  });
+  return songs[0];
+}
+
+function lookupLatestSnowManJSONP(){
+  return new Promise((resolve,reject)=>{
+    const cb='snow66Latest_'+Date.now();
+    const script=document.createElement('script');
+    const timer=setTimeout(()=>{
+      cleanup();
+      reject(new Error('timeout'));
+    },8000);
+
+    function cleanup(){
+      clearTimeout(timer);
+      try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
+      script.remove();
+    }
+
+    window[cb]=(data)=>{
+      cleanup();
+      resolve(data);
+    };
+
+    script.onerror=()=>{
+      cleanup();
+      reject(new Error('load failed'));
+    };
+
+    script.src=`https://itunes.apple.com/lookup?id=${SNOW_MAN_APPLE_ARTIST_ID}&entity=song&limit=20&sort=recent&country=jp&callback=${cb}`;
+    document.head.appendChild(script);
+  });
+}
+
+async function getLatestSnowManTrack(){
+  const url=`https://itunes.apple.com/lookup?id=${SNOW_MAN_APPLE_ARTIST_ID}&entity=song&limit=20&sort=recent&country=jp`;
+  try{
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),5000);
+    const res=await fetch(url,{signal:controller.signal});
+    clearTimeout(timer);
+    if(!res.ok) throw new Error('fetch failed');
+    return chooseLatestSnowManTrack(await res.json());
+  }catch(e){
+    try{
+      return chooseLatestSnowManTrack(await lookupLatestSnowManJSONP());
+    }catch(e2){
+      return null;
+    }
+  }
+}
+
+$('#latestTrackBtn').addEventListener('click',async()=>{
+  const btn=$('#latestTrackBtn');
+  const status=$('#latestTrackStatus');
+  btn.disabled=true;
+  status.textContent='Snow Manの最新リリースを確認しています…';
+
+  const track=await getLatestSnowManTrack();
+  btn.disabled=false;
+
+  if(!track){
+    status.textContent='自動取得できませんでした。少し時間をおいて試すか、URLを手入力してください。';
+    return;
+  }
+
+  const target=latestUrlForService(track);
+  if(target) $('#playUrl').value=target;
+
+  if(service==='Apple Music'){
+    status.textContent=`「${track.trackName}」を設定しました。`;
+  }else{
+    status.textContent=`「${track.trackName}」の${service}検索ページを設定しました。`;
+  }
 });
 
 function build(){
